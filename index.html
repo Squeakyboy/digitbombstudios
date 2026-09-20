@@ -953,23 +953,22 @@
 }
 
 /* MUSIC PLAYER */
-
 #glenplayer02 {
     position: fixed;
     bottom: 20px;
-    right: 90px;
-    width: 150px;
+    right: 20PX;
+    width: fit-content;
     z-index: 9999;
 }
-
 div.ex2 {
     display: flex;
     align-items: center;
-    width: fit-content;
+    width: 200px;
     background: white;
-    opacity: 0.75;
+    opacity: 1;
     border: 3px double #000;
     padding: 5px;
+    margin: 0;
 }
 
 .music-controls {
@@ -984,7 +983,7 @@ div.ex2 {
 .labeltext {
     margin-left: 8px;
     font-family: "Courier New", monospace;
-    font-size: 9px;
+    font-size: 15px;
     color: #222;
 }
 
@@ -997,10 +996,10 @@ div.ex2 {
     -webkit-align-self: center;
 }
 
-
 .playy,
 .pausee {
     color: #000;
+    font-size: 20px;
 }
 
 .pausee {
@@ -1012,13 +1011,25 @@ div.ex2 {
     color: #222;
 }
 
-
 @media (max-width: 768px) {
     #glenplayer02 {
         bottom: 15px;
-        right: 15px;
-        width: 130px;
+        right: 10PX;
+        width: fit-content;
     }
+    div.ex2 {
+    width: fit-content;
+    }
+    .labeltext {
+    font-size: 9px;
+    }
+    .playy,
+    .pausee {
+    font-size: 15px;
+}
+
+
+
 }
                 
     </style>
@@ -1416,6 +1427,7 @@ div.ex2 {
     </footer>
 
     <script>
+        songstart();
         let slideIndex = 1;
         showSlides(slideIndex);
 
