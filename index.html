@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DigitBombStudios</title>
     <link rel="icon" type="image/x-icon" href="gato.png">
+
+    <!-------please cr @ciarispop for the code and GLENTHEMES for the music code ~!------->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+ 
+    <!-------MUSIC PLAYER BY GLENTHEMES------->
+    <script src="//static.tumblr.com/gtjt4bo/QRmphdsdv/glenplayer02.js"></script>
+
     <style>
         :root {
             --bg-color: #3b3e42;
@@ -525,7 +532,7 @@
             padding: 2rem;
             border: 1px solid #e2e8f0;
 
-            box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.25);
+            box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.278);
 
             transition:
                 transform 0.4s cubic-bezier(0.25, 1, 0.5, 1),
@@ -658,8 +665,8 @@
             margin-right: auto;
             max-height: 400px;
             max-width: 200px;
-           border-radius: 10px;
-            box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.411);
+           border-radius: px;
+            box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.764);
             margin-bottom: 30px;
         }
 
@@ -944,6 +951,75 @@
 .active, .dot:hover {
   background-color: #717171;
 }
+
+/* MUSIC PLAYER */
+
+#glenplayer02 {
+    position: fixed;
+    bottom: 20px;
+    right: 90px;
+    width: 150px;
+    z-index: 9999;
+}
+
+div.ex2 {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    background: white;
+    opacity: 0.75;
+    border: 3px double #000;
+    padding: 5px;
+}
+
+.music-controls {
+    user-select: none;
+    -webkit-user-select: none;
+    width: 13px;
+    font-size: 13px;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.labeltext {
+    margin-left: 8px;
+    font-family: "Courier New", monospace;
+    font-size: 9px;
+    color: #222;
+}
+
+#glenplayer02 a {
+    text-decoration: none;
+}
+
+#glenplayer02 > div {
+    align-self: center;
+    -webkit-align-self: center;
+}
+
+
+.playy,
+.pausee {
+    color: #000;
+}
+
+.pausee {
+    display: none;
+}
+
+.sonata {
+    margin-left: 10px;
+    color: #222;
+}
+
+
+@media (max-width: 768px) {
+    #glenplayer02 {
+        bottom: 15px;
+        right: 15px;
+        width: 130px;
+    }
+}
                 
     </style>
 </head>
@@ -957,9 +1033,12 @@
                 <li><a href="#proyectos">Proyectos</a></li>
                 <li><a href="#contacto">Contacto</a></li>
             </ul>
+
         </nav>
     </header>
 
+
+       
     <section id="inicio" class="hero">
         <!-- Columna del margen izquierdo -->
         <div class="columna-margen margen-izquierdo">
@@ -997,7 +1076,7 @@
 
          <div class="hero-content">
 
-    <h1>Hola, somos <span>DigitBomb Studios</span></h1>
+    <h1>¡Hola, somos <span>DigitBomb Studios!</span></h1>
 
     <p>Somos un pequeño estudio indie de Madrid formado por tres alumnos de la Universidad Rey Juan Carlos. Tras ganar la <a href = "https://itch.io/jam/7-edicin-game-jam-game-scholars/entries">7ª Jam de GameScholars</a>, hemos visitado varios eventos como el CyL Games Show, el Guerrilla Game Festival, y próximamente el BCN Game Fest.</p>
 
@@ -1009,7 +1088,20 @@
 </div>
     </section>
 
-   
+     <!-------MUSIC PLAYER BY GLENTHEMES------->
+        <div id="glenplayer02">
+        <div class="ex2">
+        <div class="music-controls" onclick="songstart();">
+        <div class="playy">►</div>
+        <div class="pausee">❚❚</div>
+        </div>
+        <div class="sonata"> </div>
+        <div class="labeltext">CATNOIR OST</div>
+        </div><!--end music player-->
+        </div>
+        
+        <audio id="tune" src="https://dl.dropbox.com/s/42mjna9sxsleb5j/Luis%20Miguel%20-%20Delirio.mp3"audio"></audio>
+
 
     <section id="sobre-mi" class="about-section">
 
@@ -1316,6 +1408,8 @@
         </div>
 
     </section>
+    
+   
 
     <footer>
         <p>&copy; 2026 DigitBombStudios. Con mucho amor.</p>
