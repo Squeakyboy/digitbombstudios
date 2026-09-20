@@ -296,24 +296,28 @@
         }
 
        .tooltip {  
-        position: fixed;
-        /* Lo posicionas en un lugar fijo de la pantalla (ej. arriba en el centro) */
-        top: 60%; 
-        left: 50%;
-        transform: translateX(-50%);
-        
-        padding: 10px;
-        border-radius: 15px;
-        background: #222; /* Asegúrate de que tenga fondo para tapar lo de atrás */
-        box-shadow: inset 5px 5px 5px rgba(0, 0, 0, 0.2),
-            inset -5px -5px 15px rgba(255, 255, 255, 0.1),
-            5px 5px 15px rgba(0, 0, 0, 0.3), -5px -5px 15px rgba(255, 255, 255, 0.1);
+            position: absolute;
+            /* Se posiciona encima del icono */
+            bottom: 100%; 
+            left: 50%;
+            transform: translateX(-50%) translateY(-20px);
+            
+            padding: 10px;
+            border-radius: 15px;
+            background: #222;
+            box-shadow: inset 5px 5px 5px rgba(0, 0, 0, 0.2),
+                inset -5px -5px 15px rgba(255, 255, 255, 0.1),
+                5px 5px 15px rgba(0, 0, 0, 0.3), -5px -5px 15px rgba(255, 255, 255, 0.1);
 
-        /* SOLUCIÓN AL EFECTO VOLADOR: Controlamos la aparición sin mover el elemento */
-        opacity: 0;
-        visibility: hidden; /* Evita que el navegador intente calcular rutas raras */
-        pointer-events: none;
-        transition: opacity 0.3s ease, visibility 0.3s ease; /* ANIMACIÓN LIMPIA */
+            /* Control de animación de aparición */
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+            
+            /* Evita que el texto rompa el ancho si es largo */
+            white-space: nowrap;
+            z-index: 10;
         }
 
 
@@ -325,9 +329,10 @@
         }
 
         .tooltip-container:hover .tooltip {
-        opacity: 1;
-        visibility: visible;
-        pointer-events: auto;
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translateX(-50%) translateY(-40px);
         }
 
         .icon {
@@ -345,20 +350,23 @@
         transform: rotate(-35deg) skew(20deg);
         }
         .layer span {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 100%;
-        border: 1px solid #fff;
-        border-radius: 15px;
-        transition: all 0.3s;
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            border: 1px solid #fff;
+            border-radius: 15px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .layer span,
         .text {
         color: #e6683c;
-        border-color: #e6683c;
+        border-color: #2c1107;
         }
 
         .icon:hover.layer span {
@@ -396,6 +404,30 @@
         .icon:hover .layer span:nth-child(5) {
         opacity: 1;
         transform: translate(20px, -20px);
+        }
+
+        .layer span.fab {
+        font-size: 30px;
+        line-height: 64px;
+        text-align: center;
+        fill: #1da1f2;
+        background: #000;
+        }
+
+        .social-links-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        /* Evita que cada contenedor de icono ocupe todo el ancho */
+        .social-links-container .tooltip-container {
+            display: inline-block;
+            margin: 0;
         }
 
         .instagramSVG {
@@ -939,7 +971,6 @@
         <img src="gato.png" alt="Decoración">
         <img src="gato.png" alt="Decoración">
         <img src="gato.png" alt="Decoración">
-        <img src="gato.png" alt="Decoración">
         </div>
 
         <!-- Columna del margen derecho -->
@@ -948,7 +979,6 @@
         <img src="gato.png" alt="Decoración">
         <img src="gato.png" alt="Decoración">
              <img src="gato.png" alt="Decoración">
-        <img src="gato.png" alt="Decoración">
         <img src="gato.png" alt="Decoración">
         <img src="gato.png" alt="Decoración">
         <img src="gato.png" alt="Decoración">
@@ -1182,12 +1212,104 @@
 
     <section id="contacto">
         <h2 class="section-title">Contacto</h2>
-        <p class="contact-info">¿Tienes un proyecto en mente o quieres charlar? No dudes en escribirme.</p>
-        <a href="mailto:digit.bomb8@gmail.com">
-            <button>
-                <span class="button_top">Enviar un correo</span>
-            </button>
-        </a>
+        <p class="contact-info">Si te interesa nuestro trabajo y quieres conocer más, o simplemente quieres charlar o tienes una pregunta, escríbenos a <b>digit.bomb8@gmail.com</b> o síguenos en nuestras redes:</p>
+        
+        <div class="social-links-container">
+
+            <!-- Instagram -->
+            <div class="tooltip-container">
+                <div class="tooltip">
+                    <div class="profile">
+                        <div class="user">
+                            <div class="img">Ui</div>
+                            <div class="details">
+                                <div class="name">User</div>
+                                <div class="username">@username</div>
+                            </div>
+                        </div>
+                        <div class="about">800+ Followers</div>
+                    </div>
+                </div>
+                <div class="text">
+                    <a class="icon" href="#">
+                        <div class="layer">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span class="instagramSVG">
+                                <svg fill="white" class="svgIcon" viewBox="0 0 448 512" height="1.5em" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"></path>
+                                </svg>
+                            </span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- LinkedIn -->
+            <div class="tooltip-container">
+                <div class="tooltip">
+                    <div class="profile">
+                        <div class="user">
+                            <div class="img">Ui</div>
+                            <div class="details">
+                                <div class="name">User</div>
+                                <div class="username">@username</div>
+                            </div>
+                        </div>
+                        <div class="about">500+ Connections</div>
+                    </div>
+                </div>
+                <div class="text">
+                    <a class="icon" href="#">
+                        <div class="layer">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span class="fab fa-linkedin">
+                                <svg viewBox="0 0 448 512" height="1em" fill="#0A66C2">
+                                    <path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"></path>
+                                </svg>
+                            </span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- X / Twitter -->
+            <div class="tooltip-container">
+                <div class="tooltip">
+                    <div class="profile">
+                        <div class="user">
+                            <div class="img">Ui</div>
+                            <div class="details">
+                                <div class="name">User</div>
+                                <div class="username">@username</div>
+                            </div>
+                        </div>
+                        <div class="about">500+ Connections</div>
+                    </div>
+                </div>
+                <div class="text">
+                    <a class="icon" href="#">
+                        <div class="layer">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span class="fab fa-x">
+                                <svg viewBox="0 0 512 512" height="1em" fill="white">
+                                    <path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48h145.6l100.5 132.9L389.2 48zm-24.8 373.8h39.1L151.1 88.0h-42L364.4 421.8z"/>
+                                </svg>
+                            </span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
     </section>
 
     <footer>
