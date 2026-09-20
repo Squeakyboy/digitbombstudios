@@ -736,25 +736,23 @@
         }
 
 
-        .columna-margen img {
-            width: 180px;
-            height: auto;
-            object-fit: contain;
+       .columna-margen img {
+    width: 17vw;
+    height: auto;
+    max-width: none;
+    object-fit: contain;
 
-            transform-origin: center;
+    transform-origin: center;
+    opacity: 0;
 
-            opacity: 0;
+    --balance: 8deg;
+    --duracion: 4s;
+    --delay: 0s;
 
-            /* Variables por defecto */
-            --balance: 8deg;
-            --duracion: 4s;
-            --delay: 0s;
-
-            animation:
-            aparecerImagenInicial 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards,
-            balanceo var(--duracion) ease-out var(--delay) infinite;
-        }
-
+    animation:
+        aparecerImagenInicial 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards,
+        balanceo var(--duracion) ease-out var(--delay) infinite;
+}
 
 /* ============================= */
 /* ANIMACIÓN DE APARICIÓN */
@@ -1061,11 +1059,6 @@ div.ex2 {
         <img src="gato.png" alt="Decoración">
         <img src="gato.png" alt="Decoración">
         <img src="gato.png" alt="Decoración">
-        <img src="gato.png" alt="Decoración">
-        <img src="gato.png" alt="Decoración">
-        <img src="gato.png" alt="Decoración">
-        <img src="gato.png" alt="Decoración">
-        <img src="gato.png" alt="Decoración">
         </div>
 
         <!-- Columna del margen derecho -->
@@ -1074,11 +1067,6 @@ div.ex2 {
         <img src="gato.png" alt="Decoración">
         <img src="gato.png" alt="Decoración">
              <img src="gato.png" alt="Decoración">
-        <img src="gato.png" alt="Decoración">
-        <img src="gato.png" alt="Decoración">
-        <img src="gato.png" alt="Decoración">
-        <img src="gato.png" alt="Decoración">
-        <img src="gato.png" alt="Decoración">
         <img src="gato.png" alt="Decoración">
         <img src="gato.png" alt="Decoración">
         <img src="gato.png" alt="Decoración">
