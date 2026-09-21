@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>DigitBombStudios</title>
     <link rel="icon" type="image/x-icon" href="gato.png">
 
@@ -1539,5 +1539,10 @@
             dibujar();
         })();
     </script>
+    <script>
+    ['gesturestart', 'gesturechange', 'gestureend'].forEach(function (ev) {
+        document.addEventListener(ev, function (e) { e.preventDefault(); });
+    });
+</script>
 </body>
 </html>
