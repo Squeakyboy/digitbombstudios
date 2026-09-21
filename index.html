@@ -8,17 +8,21 @@
 
     <!-------please cr @ciarispop for the code and GLENTHEMES for the music code ~!------->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
- 
+
     <!-------MUSIC PLAYER BY GLENTHEMES------->
     <script src="//static.tumblr.com/gtjt4bo/QRmphdsdv/glenplayer02.js"></script>
 
     <style>
+        /* =====================================================
+           VARIABLES Y RESET
+           ===================================================== */
         :root {
             --bg-color: #3b3e42;
             --card-bg: #fffefe;
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
             --accent: #000000;
+            --shadow-hard: 10px 10px 0 rgba(0, 0, 0, 0.25);
         }
 
         * {
@@ -30,10 +34,17 @@
 
         body {
             background-color: var(--bg-color);
-            color: ar(--text-main)v;
             line-height: 1.6;
+            overflow-x: hidden;   /* red de seguridad: nada decorativo puede ensanchar la página en móvil */
+            overflow-x: clip;
+            /* (antes había "color: ar(--text-main)v;", que era inválido y el navegador
+               lo ignoraba. Si lo corriges a var(--text-main) el texto dentro de las
+               tarjetas blancas se vería casi blanco, así que lo he quitado.) */
         }
 
+        /* =====================================================
+           CABECERA / NAVEGACIÓN
+           ===================================================== */
         header {
             position: fixed;
             top: 0;
@@ -44,7 +55,6 @@
             border-bottom: 20px solid #111111;
         }
 
-
         nav {
             max-width: 1100px;
             margin: 0 auto;
@@ -52,26 +62,23 @@
             justify-content: space-between;
             align-items: center;
             padding: 0.7rem 2rem;
-
         }
 
         .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
             font-size: 1.5rem;
             font-weight: bold;
             color: black;
             text-decoration: none;
-            
-            /* El secreto: activamos flexbox para alinear la imagen y el texto en línea */
-            display: flex;
-            align-items: center;
-            gap: 0.75rem; /* Controla la separación exacta entre la imagen y el texto */
         }
 
         .logo-img {
-            height: 64px;  /* Ajusta este valor al tamaño que quieras que tenga tu logo */
-            width: auto;   /* Mantiene la proporción original de tu imagen para que no se deforme */
+            height: 64px;
+            width: auto;
             object-fit: contain;
-            border-radius: 4px; /* Opcional: por si tu logo es cuadrado/circular y quieres redondearlo un poco */
+            border-radius: 4px;
         }
 
         .nav-links {
@@ -84,198 +91,32 @@
             display: inline-block;
             color: rgba(25, 24, 24, 0.9);
             text-decoration: none;
-            transition: transform 0.3s ease; 
+            transition: transform 0.3s ease;
         }
 
         .nav-links a:hover {
-            transform: scale(1.1); 
+            transform: scale(1.1);
         }
 
+        /* =====================================================
+           SECCIONES GENERALES
+           ===================================================== */
         section {
             max-width: 1100px;
             margin: 0 auto;
-            padding: 5rem 2rem 0rem 2rem;
+            padding: 5rem 2rem 0 2rem;
         }
 
-        .hero {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            min-height: 60vh;
-            padding-top: 8rem;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .hero h1 span {
-            color: rgba(0, 0, 0, 0.9);
-        }
-
-        .hero p {
-            font-size: 1.25rem;
-            color: var(--text-muted);
-            margin-bottom: 2rem;
-            text-align: justify;
-        }
-        .hero-content {
-            background: #fffefe;
-            padding: 3rem;
-            border-radius: 25px;
-
-
-
-            box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.25);
-        }
-       /* From Uiverse.io by 0xnihilism */ 
-        button {
-        --button_radius: 0.75em;
-        --button_color: #e8e8e8;
-        --button_outline_color: #000000;
-        --hover_offset: 4px;
-        --active_offset: 2px;
-        --shadow_color: rgba(0, 0, 0, 0.5);
-        --glitch_offset: 2px;
-
-        font-size: 17px;
-        font-weight: bold;
-        border: none;
-        width: 200px;
-        border-radius: var(--button_radius);
-        background: var(--button_outline_color);
-        position: relative;
-        cursor: pointer;
-        transition: all 0.2s cubic-bezier(0.23, 1, 0.32, 1);
-        overflow: hidden;
-        }
-
-        .button_top {
-        display: block;
-        box-sizing: border-box;
-        border: 5px solid var(--button_outline_color);
-        border-radius: var(--button_radius);
-        padding: 0.75em 1.5em;
-        background: var(--button_color);
-        color: var(--button_outline_color);
-        transform: translateY(-0.2em);
-        transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-
-        a[href*="https://squeakyboy.itch.io/catnoir"] {
-            display: flex;
-            justify-content: center;
-            text-decoration: none;
-            width: 100%;
-        }
-
-        .btn-wide {
-            width: 320px;
-            max-width: 100%;
-        }
-
-        .button_itch {
-        width: 100%;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        box-sizing: border-box;
-        border: 5px solid var(--button_outline_color);
-        border-radius: var(--button_radius);
-        padding: 0.75em 1.5em;
-        background: var(--button_color);
-        color: var(--button_outline_color);
-        transform: translateY(-0.2em);
-        transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-
-        button:hover {
-        box-shadow: var(--hover_offset) var(--hover_offset) 0 var(--shadow_color);
-        transform: translate(
-            calc(-1 * var(--hover_offset)),
-            calc(-1 * var(--hover_offset))
-        );
-        }
-
-        button:hover .button_top .button_itch {
-        transform: translateY(-0.33em);
-        }
-
-        button:active .button_top .button_itch {
-        transform: translateY(0);
-        }
-
-        button:active {
-        box-shadow: var(--active_offset) var(--active_offset) 0 var(--shadow_color);
-        transform: translate(
-            calc(-1 * var(--active_offset)),
-            calc(-1 * var(--active_offset))
-        );
-        }
-
-        button:focus {
-        outline: none;
-        box-shadow: 0 0 0 2px var(--button_outline_color),
-            inset 0 0 0 2px var(--button_color);
-        }
-
-        /* Brutalist hover effect */
-        button::before,
-        button::after {
-        content: attr(data-content);
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: var(--button_color);
-        color: var(--button_outline_color);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.2s cubic-bezier(0.23, 1, 0.32, 1);
-        overflow: hidden;
-        border-radius: var(--button_radius);
-        opacity: 0;
-        }
-
-        /* Brutalist active effect */
-        button:active::before,
-        button:active::after {
-        transform: none;
-        }
-
-        /* Additional brutalist flair */
-        @keyframes brutalistShake {
-        0%,
-        100% {
-            transform: translateX(0) translateY(0);
-        }
-        25% {
-            transform: translateX(-2px) translateY(-2px) rotate(-1deg);
-        }
-        75% {
-            transform: translateX(2px) translateY(2px) rotate(1deg);
-        }
-        }
-
-        button:hover {
-        animation: brutalistShake 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
-        }
-
-
-       .section-title {
-            background: #fffefe;
-            border-radius: 5px;
-            box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.25);
-            width: fit-content;
-            font-size: 2rem;
-            margin-bottom: 3rem;
+        .section-title {
             position: relative;
-            text-align: center;
-
+            width: fit-content;
+            margin-bottom: 3rem;
             padding: 0.1rem 1.5rem;
+            background: var(--card-bg);
+            border-radius: 5px;
+            box-shadow: var(--shadow-hard);
+            font-size: 2rem;
+            text-align: center;
         }
 
         .section-title::after {
@@ -288,322 +129,264 @@
             background-color: var(--accent);
         }
 
-
-       .tooltip-container {
-        position: relative; /* Mantenlo relativo para los márgenes */
-        
-        /* SOLUCIÓN AL ESTIRAMIENTO */
-        width: fit-content;  /* Forza a que mida solo lo que mide el icono/texto */
-        margin: 20px auto 0; /* Añade margen arriba (ej. 20px) y lo centra horizontalmente */
-        
-        /* Tus otros estilos */
-        cursor: pointer;
-        transition: all 0.2s;
-        font-size: 17px;
-        border-radius: 10px;
-        }
-
-       .tooltip {  
-            position: absolute;
-            /* Se posiciona encima del icono */
-            bottom: 100%; 
-            left: 50%;
-            transform: translateX(-50%) translateY(-20px);
-            
-            padding: 10px;
-            border-radius: 15px;
-            background: #222;
-            box-shadow: inset 5px 5px 5px rgba(0, 0, 0, 0.2),
-                inset -5px -5px 15px rgba(255, 255, 255, 0.1),
-                5px 5px 15px rgba(0, 0, 0, 0.3), -5px -5px 15px rgba(255, 255, 255, 0.1);
-
-            /* Control de animación de aparición */
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-            transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
-            
-            /* Evita que el texto rompa el ancho si es largo */
-            white-space: nowrap;
-            z-index: 10;
-        }
-
-
-        .profile {
-        background: #2a2b2f;
-        border-radius: 10px 15px;
-        padding: 10px;
-        border: 1px solid #52382f;
-        }
-
-        .tooltip-container:hover .tooltip {
-            opacity: 1;
-            visibility: visible;
-            pointer-events: auto;
-            transform: translateX(-50%) translateY(-40px);
-        }
-
-        .icon {
-        text-decoration: none;
-        color: #fff;
-        display: block;
-        position: relative;
-        }
-        .layer {
-        width: 55px;
-        height: 55px;
-        transition: transform 0.3s;
-        }
-        .icon:hover .layer {
-        transform: rotate(-35deg) skew(20deg);
-        }
-        .layer span {
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 100%;
-            border: 1px solid #fff;
-            border-radius: 15px;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .layer span,
-        .text {
-        color: #e6683c;
-        border-color: #2c1107;
-        }
-
-        .icon:hover.layer span {
-        box-shadow: -1px 1px 3px #e6683c;
-        }
-        .icon .text {
-        position: absolute;
-        left: 50%;
-        bottom: -5px;
-        opacity: 0;
-        font-weight: 500;
-        transform: translateX(-50%);
-        transition: bottom 0.3s ease, opacity 0.3s ease;
-        }
-        .icon:hover .text {
-        bottom: -35px;
-        opacity: 1;
-        }
-
-        .icon:hover .layer span:nth-child(1) {
-        opacity: 0.2;
-        }
-        .icon:hover .layer span:nth-child(2) {
-        opacity: 0.4;
-        transform: translate(5px, -5px);
-        }
-        .icon:hover .layer span:nth-child(3) {
-        opacity: 0.6;
-        transform: translate(10px, -10px);
-        }
-        .icon:hover .layer span:nth-child(4) {
-        opacity: 0.8;
-        transform: translate(15px, -15px);
-        }
-        .icon:hover .layer span:nth-child(5) {
-        opacity: 1;
-        transform: translate(20px, -20px);
-        }
-
-        .layer span.fab {
-        font-size: 30px;
-        line-height: 64px;
-        text-align: center;
-        fill: #1da1f2;
-        background: #000;
-        }
-
-        .social-links-container {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-            gap: 40px;
-            width: 100%;
-            margin-top: 20px;
-        }
-
-        /* Evita que cada contenedor de icono ocupe todo el ancho */
-        .social-links-container .tooltip-container {
-            display: inline-block;
-            margin: 0;
-        }
-
-        .instagramSVG {
-        font-size: 25px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: -webkit-linear-gradient(
-            45deg,
-            #f09433 0%,
-            #e6683c 25%,
-            #dc2743 50%,
-            #cc2366 75%,
-            #bc1888 100%
-        );
-        background: linear-gradient(
-            45deg,
-            #f09433 0%,
-            #e6683c 25%,
-            #dc2743 50%,
-            #cc2366 75%,
-            #bc1888 100%
-        );
-        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f09433', endColorstr='#bc1888',GradientType=1 );
-        }
-        .user {
-        display: flex;
-        gap: 10px;
-        }
-        .img {
-        width: 50px;
-        height: 50px;
-        font-size: 25px;
-        font-weight: 700;
-        border: 1px solid #e6683c;
-        border-radius: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: #fff;
-        }
-        .name {
-        font-size: 17px;
-        font-weight: 700;
-        color: #e6683c;
-        }
-        .details {
-        display: flex;
-        flex-direction: column;
-        gap: 0;
-        color: #fff;
-        }
-        .about {
-        color: #ccc;
-        padding-top: 5px;
-        }
-
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
         }
 
-                /* ===================================================
-           ESTRUCTURA DE TARJETAS Y ANIMACIÓN ULTRA-SUAVE
-           =================================================== */
-
-        .card {
-            background: #fffefe;
-            padding: 3rem;
-            border-radius: 25px;
-            box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.25);
-        }
-
-
-      
-
-        /* ===================================================
-        CARDS "SOBRE MÍ"
-        =================================================== */
-
-        .about-section .grid {
-            align-items: center;
-        }
-
-        /* Card normal */
-        .about-card {
-            position: relative;
-            z-index: 1;
-            cursor: pointer;
-
-            background-color: var(--card-bg);
-            border-radius: 10px;
-            padding: 2rem;
-            border: 1px solid #e2e8f0;
-
-            box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.278);
-
-            transition:
-                transform 0.4s cubic-bezier(0.25, 1, 0.5, 1),
-                box-shadow 0.4s ease,
-                opacity 0.4s ease;
-            
-            will-change: transform;
-        }
-
-        /* Información extra inicialmente escondida */
-        .about-card .card-extra {
-            max-height: 0;
-            opacity: 0;
-            overflow: hidden;
-            margin-top: 0;
-
-            transition:
-                max-height 0.4s cubic-bezier(0.25, 1, 0.5, 1),
-                opacity 0.3s ease,
-                margin-top 0.4s ease;
-        }
-
-        /* ===================================================
-        CARD CON HOVER
-        =================================================== */
-
-        .about-section .about-card:hover {
-            z-index: 50;
-
-            /*
-            Escala general de la card.
-            No usamos max-height aquí.
-            */
-            transform: scale(1.12);
-
-            opacity: 1;
-
-            box-shadow:
-                0 25px 50px rgba(0, 0, 0, 0.4);
-        }
-
-        /* Mostrar información extra */
-        .about-section .about-card:hover .card-extra {
-            max-height: 300px;
-            opacity: 1;
-            margin-top: 1.5rem;
-        }
-
-
-        /* ===================================================
-        LAS OTRAS CARDS
-        =================================================== */
-
-        .about-section:has(.about-card:hover) .about-card:not(:hover) {
-            transform: scale(0.88);
-            opacity: 0.5;
-        }
-
-
-        /* ===================================================
-        TEXTO
-        =================================================== */
-
-        .about-card h3 {
+        footer {
             text-align: center;
+            padding: 2rem;
+            margin-top: 1rem;
+            color: var(--text-muted);
+        }
+
+        /* =====================================================
+           HERO
+           ===================================================== */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 60vh;
+            padding-top: 8rem;
+        }
+
+        .hero h1 {
+            margin-bottom: 1rem;
+            font-size: 3.5rem;
+        }
+
+        .hero h1 span {
+            color: rgba(0, 0, 0, 0.9);
+        }
+
+        .hero p {
+            margin-bottom: 2rem;
+            color: var(--text-muted);
+            font-size: 1.25rem;
+            text-align: justify;
+        }
+
+        .hero-content {
+            position: relative;   /* necesario para que las chinchetas se posicionen dentro de la tarjeta */
+            padding: 3rem;
+            background: var(--card-bg);
+            border-radius: 25px;
+            box-shadow: var(--shadow-hard);
+        }
+
+        /* =====================================================
+           CHINCHETAS + CURVAS BÉZIER
+           Cualquier <img class="foto-superior" data-curva> genera su propia curva.
+           ===================================================== */
+        /* Cada chincheta se puede ajustar por separado con variables en su style="":
+           --top, --left, --right, --bottom  posición dentro de su tarjeta
+           --rot                             rotación
+           --ancho                           tamaño (por defecto fluido: 60px-120px)
+           Versión móvil (<768px): --top-m, --left-m, --right-m, --bottom-m, --rot-m, --ancho-m
+
+           RESPONSIVO: --tam es el tamaño real de la chincheta en cada momento (escritorio
+           o móvil). Sirve para colocar la chincheta por su CENTRO y respecto a las esquinas
+           de la tarjeta en vez de con píxeles fijos, así siempre cae en el mismo sitio:
+             esquina inferior derecha:  --left: calc(100% - 26px - var(--tam) / 2);
+                                        --top:  calc(100% -  5px - var(--tam) / 2);
+             (26px y 5px = cuánto entra el centro de la chincheta desde el borde) */
+        .foto-superior {
+            --tam: var(--ancho, clamp(60px, 10vw, 120px));
+            position: absolute;
+            top: var(--top, 20px);
+            left: var(--left, 20px);
+            right: var(--right, auto);
+            bottom: var(--bottom, auto);
+            rotate: var(--rot, 0deg);
+            width: var(--tam);
+            margin: 0;
+            object-fit: cover;
+            z-index: 11;
+        }
+
+        /* Lienzo único (fixed) donde se dibujan TODAS las curvas */
+        #lienzo-curva {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none; /* permite hacer clic a través del SVG */
+            z-index: 10;          /* por encima de las cards (1-3), por debajo de los botones (11) */
+        }
+
+        /* =====================================================
+           GATOS DECORATIVOS DE LOS MÁRGENES
+           ===================================================== */
+        .columna-margen {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            position: absolute;
+            top: 150px;
+            z-index: -2;
+
+            /* Oculto por defecto (móvil / ventana pequeña) */
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transform: scale(0.5);
+            transition: opacity 0.5s ease, visibility 0.5s ease, transform 0.5s ease;
+        }
+
+        .margen-izquierdo { left: 30px; }
+        .margen-derecho   { right: 30px; }
+
+        /* Visible solo en pantallas grandes */
+        @media (min-width: 1500px) {
+            .columna-margen {
+                opacity: 1;
+                visibility: visible;
+                transform: scale(1) rotate(0deg);
+                transition: opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1),
+                            visibility 0.6s ease,
+                            transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+            }
+        }
+
+        .columna-margen img {
+            width: 17vw;
+            height: auto;
+            max-width: none;
+            object-fit: contain;
+            transform-origin: center;
+            opacity: 0;
+
+            --balance: 8deg;
+            --duracion: 4s;
+            --delay: 0s;
+
+            animation:
+                aparecerImagenInicial 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards,
+                balanceo var(--duracion) ease-out var(--delay) infinite;
+        }
+
+        @keyframes aparecerImagenInicial {
+            0%   { opacity: 0; transform: scale(0.5); }
+            100% { opacity: 1; transform: scale(1) rotate(var(--rotacion-final)); }
+        }
+
+        @keyframes balanceo {
+            0%, 15%   { transform: rotate(calc(var(--rotacion-final) - var(--balance))); }
+            40%, 55%  { transform: rotate(calc(var(--rotacion-final) + var(--balance))); }
+            80%, 100% { transform: rotate(calc(var(--rotacion-final) - var(--balance))); }
+        }
+
+        /* Cada gato con su propio ángulo, balanceo y ritmo */
+        .columna-margen img:nth-child(1) { --rotacion-final:  15deg; --balance:  6deg; --duracion: 3.2s; --delay:  0s;    }
+        .columna-margen img:nth-child(2) { --rotacion-final: -20deg; --balance: 10deg; --duracion: 4.7s; --delay: -1.2s; }
+        .columna-margen img:nth-child(3) { --rotacion-final:  45deg; --balance:  5deg; --duracion: 3.8s; --delay: -0.7s; }
+        .columna-margen img:nth-child(4) { --rotacion-final: -15deg; --balance:  8deg; --duracion: 5.2s; --delay: -2s;   }
+        .columna-margen img:nth-child(5) { --rotacion-final:  20deg; --balance: 12deg; --duracion: 4.1s; --delay: -1.5s; }
+        .columna-margen img:nth-child(6) { --rotacion-final: -45deg; --balance:  7deg; --duracion: 3.5s; --delay: -0.4s; }
+        .columna-margen img:nth-child(7) { --rotacion-final:  15deg; --balance:  9deg; --duracion: 4.5s; --delay: -2.5s; }
+        .columna-margen img:nth-child(8) { --rotacion-final: -20deg; --balance:  6deg; --duracion: 5.5s; --delay: -1.8s; }
+        .columna-margen img:nth-child(9) { --rotacion-final:  45deg; --balance: 11deg; --duracion: 3.9s; --delay: -0.9s; }
+
+        /* =====================================================
+           BOTONES (Uiverse.io by 0xnihilism)
+           ===================================================== */
+        button {
+            --button_radius: 0.75em;
+            --button_color: #e8e8e8;
+            --button_outline_color: #000000;
+            --hover_offset: 4px;
+            --active_offset: 2px;
+            --shadow_color: rgba(0, 0, 0, 0.5);
+
+            position: relative;
+            z-index: 11;      /* por encima de la curva (10) */
+            width: 200px;
+            font-size: 17px;
+            font-weight: bold;
+            border: none;
+            border-radius: var(--button_radius);
+            background: var(--button_outline_color);
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .button_top,
+        .button_itch {
+            display: block;
+            box-sizing: border-box;
+            border: 5px solid var(--button_outline_color);
+            border-radius: var(--button_radius);
+            padding: 0.75em 1.5em;
+            background: var(--button_color);
+            color: var(--button_outline_color);
+            transform: translateY(-0.2em);
+            transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .button_itch {
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn-wide {
+            width: 320px;
+            max-width: 100%;
+        }
+
+        a[href*="https://squeakyboy.itch.io/catnoir"] {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            text-decoration: none;
+        }
+
+        button:hover {
+            box-shadow: var(--hover_offset) var(--hover_offset) 0 var(--shadow_color);
+            transform: translate(calc(-1 * var(--hover_offset)), calc(-1 * var(--hover_offset)));
+            animation: brutalistShake 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+        }
+
+        button:active {
+            box-shadow: var(--active_offset) var(--active_offset) 0 var(--shadow_color);
+            transform: translate(calc(-1 * var(--active_offset)), calc(-1 * var(--active_offset)));
+        }
+
+        button:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px var(--button_outline_color),
+                        inset 0 0 0 2px var(--button_color);
+        }
+
+        @keyframes brutalistShake {
+            0%, 100% { transform: translate(0, 0); }
+            25%      { transform: translate(-2px, -2px) rotate(-1deg); }
+            75%      { transform: translate(2px, 2px) rotate(1deg); }
+        }
+
+        /* =====================================================
+           TARJETAS
+           ===================================================== */
+        .card {
+            padding: 3rem;
+            background: var(--card-bg);
+            border-radius: 25px;
+            box-shadow: var(--shadow-hard);
+        }
+
+        .card h3 {
             margin-bottom: 1rem;
             color: var(--accent);
-            font-size: 1.7rem;
+            font-size: 1.3rem;
+            text-align: center;
         }
 
-        .about-card p {
+        .card p {
             color: #334155;
             font-size: 0.95rem;
         }
@@ -612,13 +395,75 @@
             color: var(--accent);
         }
 
+        /* =====================================================
+           TARJETAS "SOBRE NOSOTROS" (hover con zoom)
+           ===================================================== */
+        .about-section .grid {
+            align-items: center;
+        }
 
-        /* ===================================================
-        MÓVIL
-        =================================================== */
+        .about-card {
+            position: relative;
+            /* Sin z-index ni will-change aquí: si esta tarjeta formara su propio
+               contexto de apilamiento, "atraparía" a la chincheta de dentro y
+               esta ya no podría competir con la curva (z-index:10). Al dejarla
+               sin contexto propio, la tarjeta pinta por debajo de la curva y la
+               chincheta (z-index:11 en .foto-superior) compite directamente
+               contra la curva y queda por encima. */
+            padding: 2rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.278);
+            cursor: pointer;
+            transition:
+                transform 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+                box-shadow 0.4s ease,
+                opacity 0.4s ease;
+        }
+
+        /* Información extra: escondida hasta el hover */
+        .about-card .card-extra {
+            max-height: 0;
+            margin-top: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition:
+                max-height 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+                opacity 0.3s ease,
+                margin-top 0.4s ease;
+        }
+
+        .about-section .about-card:hover {
+            z-index: 13;  /* mayor que la curva (10); al hacer scale(), esta tarjeta
+                              forma su propio contexto de apilamiento igualmente
+                              (por el transform), así que aquí sí conviene que
+                              suba por encima de todo mientras está en hover */
+            transform: scale(1.12);
+            opacity: 1;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+        }
+
+        .about-section .about-card:hover .card-extra {
+            max-height: 300px;
+            margin-top: 1.5rem;
+            opacity: 1;
+        }
+
+        /* Las otras cards se encogen y se atenúan */
+        .about-section:has(.about-card:hover) .about-card:not(:hover) {
+            transform: scale(0.88);
+            opacity: 0.5;
+        }
+
+        .images {
+            display: block;
+            max-height: 400px;
+            max-width: 200px;
+            margin: 0 auto 30px;
+            box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.764);
+        }
 
         @media (max-width: 768px) {
-
             .about-section .grid {
                 display: flex;
                 flex-direction: column;
@@ -634,414 +479,371 @@
             }
         }
 
-        .card h3 {
-            text-align: center;
-            margin-bottom: 1rem;
-            color: var(--accent);
-            font-size: 1.3rem;
+        /* =====================================================
+           ICONOS SOCIALES + TOOLTIP (Uiverse.io by vinodjangid07)
+           ===================================================== */
+        .social-links-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            width: 100%;
+            margin-top: 20px;
         }
 
-        .card p {
-            color: #334155;
-            font-size: 0.95rem;
+        .tooltip-container {
+            position: relative;
+            width: fit-content;
+            margin: 20px auto 0;
+            font-size: 17px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
         }
 
-        .contact-info {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
+        .social-links-container .tooltip-container {
+            display: inline-block;
+            margin: 0;
         }
 
-        footer {
-            text-align: center;
-            padding: 2rem;
-            color: var(--text-muted);
-            margin-top: 1rem;
+        .tooltip {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-20px);
+            padding: 10px;
+            border-radius: 15px;
+            background: #222;
+            box-shadow: inset 5px 5px 5px rgba(0, 0, 0, 0.2),
+                        inset -5px -5px 15px rgba(255, 255, 255, 0.1),
+                        5px 5px 15px rgba(0, 0, 0, 0.3),
+                        -5px -5px 15px rgba(255, 255, 255, 0.1);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            white-space: nowrap;
+            z-index: 10;
+            transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
         }
 
-        .images {
+        .tooltip-container:hover .tooltip {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translateX(-50%) translateY(-40px);
+        }
+
+        .profile {
+            padding: 10px;
+            background: #2a2b2f;
+            border: 1px solid #52382f;
+            border-radius: 10px 15px;
+        }
+
+        .user    { display: flex; gap: 10px; }
+        .details { display: flex; flex-direction: column; gap: 0; color: #fff; }
+        .about   { padding-top: 5px; color: #ccc; }
+
+        .img {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            font-size: 25px;
+            font-weight: 700;
+            background: #fff;
+            border: 1px solid #e6683c;
+            border-radius: 10px;
+        }
+
+        .name {
+            font-size: 17px;
+            font-weight: 700;
+            color: #e6683c;
+        }
+
+        .icon {
+            position: relative;
             display: block;
-            margin-left: auto;
-            margin-right: auto;
-            max-height: 400px;
-            max-width: 200px;
-           border-radius: px;
-            box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.764);
-            margin-bottom: 30px;
+            color: #fff;
+            text-decoration: none;
         }
 
+        .layer {
+            width: 55px;
+            height: 55px;
+            transition: transform 0.3s;
+        }
+
+        .icon:hover .layer {
+            transform: rotate(-35deg) skew(20deg);
+        }
+
+        .layer span {
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            width: 100%;
+            border: 1px solid #fff;
+            border-radius: 15px;
+            transition: all 0.3s;
+        }
+
+        .layer span,
+        .text {
+            color: #e6683c;
+            border-color: #2c1107;
+        }
+
+        .icon .text {
+            position: absolute;
+            left: 50%;
+            bottom: -5px;
+            opacity: 0;
+            font-weight: 500;
+            transform: translateX(-50%);
+            transition: bottom 0.3s ease, opacity 0.3s ease;
+        }
+
+        .icon:hover .text {
+            bottom: -35px;
+            opacity: 1;
+        }
+
+        .icon:hover .layer span:nth-child(1) { opacity: 0.2; }
+        .icon:hover .layer span:nth-child(2) { opacity: 0.4; transform: translate(5px, -5px); }
+        .icon:hover .layer span:nth-child(3) { opacity: 0.6; transform: translate(10px, -10px); }
+        .icon:hover .layer span:nth-child(4) { opacity: 0.8; transform: translate(15px, -15px); }
+        .icon:hover .layer span:nth-child(5) { opacity: 1;   transform: translate(20px, -20px); }
+
+        .layer span.fab {
+            font-size: 30px;
+            line-height: 64px;
+            text-align: center;
+            background: #000;
+        }
+
+        .instagramSVG {
+            font-size: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+        }
+
+        .svgIcon  { border-radius: 15px; }
+        .svgIcon1 { border-radius: 17px; height: 56px; }
+
+        /* =====================================================
+           PROYECTOS: TRÁILER Y SLIDESHOW
+           ===================================================== */
         .catnoir-img {
+            display: block;
             width: 800px;
             max-width: 100%;
             margin: 0 auto 40px auto;
-            display: block;
         }
 
+        .trailer {
+            display: block;
+            max-width: 900px;
+            aspect-ratio: 16 / 9;
+            margin: auto;
+            background: #000;
+            border: 5px solid #000;
+            border-radius: 10px;
+            box-shadow: 10px 10px 0 #000;
+            overflow: hidden;
+        }
+
+        .trailer iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .slideshow-container {
+            position: relative;
+            max-width: 500px;
+            margin: 50px auto 0;
+            box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.411);
+        }
+
+        .mySlides {
+            display: none;
+        }
+
+        .mySlides img {
+            display: block;
+            width: 100%;
+            border: 3px solid #000000;
+            box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.411);
+        }
+
+        .prev,
+        .next {
+            position: absolute;
+            top: 120%;
+            transform: translateY(-50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            color: #000000;
+            background-color: #e8e8e8;
+            border: 4px solid #000000;
+            border-radius: 10px;
+            box-shadow: 3px 3px 0 #000000;
+            font-weight: bold;
+            font-size: 20px;
+            cursor: pointer;
+            user-select: none;
+            z-index: 10;
+            transition: all 0.2s ease;
+        }
+
+        .prev { left: 30px; }
+        .next { right: 30px; }
+
+        .prev:hover,
+        .next:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .dot {
+            display: inline-block;
+            height: 15px;
+            width: 15px;
+            margin: 0 2px;
+            background-color: #bbb;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.6s ease;
+        }
+
+        .active,
+        .dot:hover {
+            background-color: #717171;
+        }
+
+        /* =====================================================
+           CONTACTO
+           ===================================================== */
+        .contact-info {
+            margin-bottom: 2rem;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* =====================================================
+           REPRODUCTOR DE MÚSICA (Glenthemes)
+           ===================================================== */
+        #glenplayer02 {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: fit-content;
+            z-index: 9999;
+        }
+
+        #glenplayer02 a { text-decoration: none; }
+        #glenplayer02 > div { align-self: center; -webkit-align-self: center; }
+
+        div.ex2 {
+            display: flex;
+            align-items: center;
+            width: 200px;
+            margin: 0;
+            padding: 5px;
+            background: white;
+            border: 3px double #000;
+        }
+
+        .music-controls {
+            flex-shrink: 0;
+            width: 13px;
+            font-size: 13px;
+            cursor: pointer;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .labeltext {
+            margin-left: 8px;
+            font-family: "Courier New", monospace;
+            font-size: 15px;
+            color: #222;
+        }
+
+        .playy,
+        .pausee {
+            color: #000;
+            font-size: 20px;
+        }
+
+        .pausee { display: none; }
+        .sonata { margin-left: 10px; color: #222; }
+
+        /* =====================================================
+           HERO (texto) Y MÓVIL
+           ===================================================== */
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.5rem; }
+
+            .foto-superior {
+                /* en móvil las chinchetas son más pequeñas (44px-64px según el ancho) */
+                --tam: var(--ancho-m, var(--ancho, clamp(44px, 12vw, 64px)));
+                top:    var(--top-m,    var(--top,    20px));
+                left:   var(--left-m,   var(--left,   20px));
+                right:  var(--right-m,  var(--right,  auto));
+                bottom: var(--bottom-m, var(--bottom, auto));
+                rotate: var(--rot-m,    var(--rot,    0deg));
+                width:  var(--tam);
+            }
+
             .nav-links { display: none; }
             .catnoir-img { width: 90%; }
+
+            #glenplayer02 { bottom: 15px; right: 10px; }
+            div.ex2 { width: fit-content; }
+            .labeltext { font-size: 9px; }
+            .playy,
+            .pausee { font-size: 15px; }
         }
-
-       /* 1. CONFIGURACIÓN INICIAL (Para móviles y ventanas pequeñas) */
-        .columna-margen {
-        display: flex; /* Mantenemos flex activo siempre */
-        position: absolute;
-        top: 150px; 
-        z-index: -2;
-        flex-direction: column;
-        gap: 40px; 
-
-        /* ESTADO OCULTO POR DEFECTO: Así se verá en móvil o ventana pequeña */
-        opacity: 0;
-        visibility: hidden;
-        pointer-events: none;
-        
-        /* TRANSICIÓN DE SALIDA: Controla cómo desaparece cuando achicas la pantalla */
-        transition: opacity 0.5s ease, visibility 0.5s ease, transform 0.5s ease;
-        transform: scale(0.5); /* Se encogen al ocultarse */
-        }
-
-        /* Posiciones iniciales ocultas */
-        .margen-izquierdo { 
-        left: 30px; 
-        transform: scale(0.5) ; /* Rotación de salida izquierda */
-        }  
-        .margen-derecho { 
-        right: 30px; 
-        transform: scale(0.5); /* Rotación de salida derecha */
-        }   
-
-
-        /* 2. ENTRADA SUAVE CUANDO LA PANTALLA ES GRANDE (ESCRITORIO) */
-        @media (min-width: 1500px) {
-        .columna-margen {
-            /* Al agrandar la pantalla, se activan y muestran con suavidad */
-            opacity: 1;
-            visibility: visible;
-            
-            /* TRANSICIÓN DE ENTRADA: Controla la suavidad al agrandar la ventana */
-            transition: opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1), 
-                        visibility 0.6s ease, 
-                        transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-        }
-
-        /* Volver a su tamaño y posición final cuando hay espacio */
-        .margen-izquierdo { 
-            transform: scale(1) rotate(0deg); 
-        }  
-        .margen-derecho { 
-            transform: scale(1) rotate(0deg); 
-        }   
-        }
-
-
-       .columna-margen img {
-    width: 17vw;
-    height: auto;
-    max-width: none;
-    object-fit: contain;
-
-    transform-origin: center;
-    opacity: 0;
-
-    --balance: 8deg;
-    --duracion: 4s;
-    --delay: 0s;
-
-    animation:
-        aparecerImagenInicial 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards,
-        balanceo var(--duracion) ease-out var(--delay) infinite;
-}
-
-/* ============================= */
-/* ANIMACIÓN DE APARICIÓN */
-/* ============================= */
-
-@keyframes aparecerImagenInicial {
-    0% {
-        opacity: 0;
-        transform: scale(0.5);
-    }
-
-    100% {
-        opacity: 1;
-        transform: scale(1) rotate(var(--rotacion-final));
-    }
-}
-
-
-/* ============================= */
-/* ANIMACIÓN DE BALANCEO */
-/* ============================= */
-@keyframes balanceo {
-    0%, 15% {
-        transform: rotate(calc(var(--rotacion-final) - var(--balance)));
-    }
-
-    40% {
-        transform: rotate(calc(var(--rotacion-final) + var(--balance)));
-    }
-
-    55% {
-        transform: rotate(calc(var(--rotacion-final) + var(--balance)));
-    }
-
-    80%, 100% {
-        transform: rotate(calc(var(--rotacion-final) - var(--balance)));
-    }
-}
-
-.columna-margen img:nth-child(1) {
-    --rotacion-final: 15deg;
-    --balance: 6deg;
-    --duracion: 3.2s;
-    --delay: 0s;
-}
-
-.columna-margen img:nth-child(2) {
-    --rotacion-final: -20deg;
-    --balance: 10deg;
-    --duracion: 4.7s;
-    --delay: -1.2s;
-}
-
-.columna-margen img:nth-child(3) {
-    --rotacion-final: 45deg;
-    --balance: 5deg;
-    --duracion: 3.8s;
-    --delay: -0.7s;
-}
-
-.columna-margen img:nth-child(4) {
-    --rotacion-final: -15deg;
-    --balance: 8deg;
-    --duracion: 5.2s;
-    --delay: -2s;
-}
-
-.columna-margen img:nth-child(5) {
-    --rotacion-final: 20deg;
-    --balance: 12deg;
-    --duracion: 4.1s;
-    --delay: -1.5s;
-}
-
-.columna-margen img:nth-child(6) {
-    --rotacion-final: -45deg;
-    --balance: 7deg;
-    --duracion: 3.5s;
-    --delay: -0.4s;
-}
-
-.columna-margen img:nth-child(7) {
-    --rotacion-final: 15deg;
-    --balance: 9deg;
-    --duracion: 4.5s;
-    --delay: -2.5s;
-}
-
-.columna-margen img:nth-child(8) {
-    --rotacion-final: -20deg;
-    --balance: 6deg;
-    --duracion: 5.5s;
-    --delay: -1.8s;
-}
-
-.columna-margen img:nth-child(9) {
-    --rotacion-final: 45deg;
-    --balance: 11deg;
-    --duracion: 3.9s;
-    --delay: -0.9s;
-}
-
-.trailer {
-    max-width: 900px;
-    aspect-ratio: 16 / 9;
-    margin: 0 auto 3rem auto;
-    border: 5px solid #000;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 10px 10px 0 #000;
-    background: #000;
-    display: block;
-    margin-top: auto;
-    margin-bottom: auto;
-}
-
-.trailer iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-}
-
-* {box-sizing:border-box}
-
-/* Slideshow container */
-.slideshow-container {
-  max-width: 500px;
-  position: relative;
-  margin: auto;
-  margin-top: 50px;
-  box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.411);
-}
-
-/* Hide the images by default */
-.mySlides {
-  display: none;
-}
-
-.mySlides img {
-    width: 100%;
-    display: block;
-    border: 3px solid #000000;
-    box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.411);
-}
-
-/* Next & previous buttons */
-.prev, .next {
-    cursor: pointer;
-    position: absolute;
-    top: 120%;
-    transform: translateY(-50%);
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #000000;
-    background-color: #e8e8e8;
-    border: 4px solid #000000;
-    border-radius: 10px;
-    font-weight: bold;
-    font-size: 20px;
-    transition: all 0.2s ease;
-    user-select: none;
-    box-shadow: 3px 3px 0 #000000;
-    z-index: 10;
-}
-
-.prev {
-    left: 30px;
-}
-
-.next {
-    right: 30px;
-}
-
-/* On hover, add a black background color with a little bit see-through */
-.prev:hover, .next:hover {
-  background-color: rgba(0,0,0,0.8);
-}
-
-/* The dots/bullets/indicators */
-.dot {
-  cursor: pointer;
-  height: 15px;
-  width: 15px;
-  margin: 0 2px;
-  background-color: #bbb;
-  border-radius: 50%;
-  display: inline-block;
-  transition: background-color 0.6s ease;
-}
-
-.active, .dot:hover {
-  background-color: #717171;
-}
-
-/* MUSIC PLAYER */
-#glenplayer02 {
-    position: fixed;
-    bottom: 20px;
-    right: 20PX;
-    width: fit-content;
-    z-index: 9999;
-}
-div.ex2 {
-    display: flex;
-    align-items: center;
-    width: 200px;
-    background: white;
-    opacity: 1;
-    border: 3px double #000;
-    padding: 5px;
-    margin: 0;
-}
-
-.music-controls {
-    user-select: none;
-    -webkit-user-select: none;
-    width: 13px;
-    font-size: 13px;
-    cursor: pointer;
-    flex-shrink: 0;
-}
-
-.labeltext {
-    margin-left: 8px;
-    font-family: "Courier New", monospace;
-    font-size: 15px;
-    color: #222;
-}
-
-#glenplayer02 a {
-    text-decoration: none;
-}
-
-#glenplayer02 > div {
-    align-self: center;
-    -webkit-align-self: center;
-}
-
-.playy,
-.pausee {
-    color: #000;
-    font-size: 20px;
-}
-
-.pausee {
-    display: none;
-}
-
-.sonata {
-    margin-left: 10px;
-    color: #222;
-}
-
-.svgIcon {
-    border-radius: 15px;
-}
-.svgIcon1 {
-    border-radius: 17px;
-    height: 56px;
-}
-
-
-@media (max-width: 768px) {
-    #glenplayer02 {
-        bottom: 15px;
-        right: 10PX;
-        width: fit-content;
-    }
-    div.ex2 {
-    width: fit-content;
-    }
-    .labeltext {
-    font-size: 9px;
-    }
-    .playy,
-    .pausee {
-    font-size: 15px;
-}
-
-
-
-}
-                
     </style>
 </head>
 <body>
+
+    <!-- ===================================================
+         ICONOS SVG (se definen UNA vez y se reutilizan con <use>)
+         =================================================== -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <symbol id="i-instagram" viewBox="0 0 448 512">
+            <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/>
+        </symbol>
+        <symbol id="i-linkedin" viewBox="0 0 448 512">
+            <path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"/>
+        </symbol>
+        <symbol id="i-x" viewBox="0 0 512 512">
+            <path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48h145.6l100.5 132.9L389.2 48zm-24.8 373.8h39.1L151.1 88.0h-42L364.4 421.8z"/>
+        </symbol>
+        <symbol id="i-github" viewBox="0 0 256 250">
+            <path d="M128.00106,0 C57.3172926,0 0,57.3066942 0,128.00106 C0,184.555281 36.6761997,232.535542 87.534937,249.460899 C93.9320223,250.645779 96.280588,246.684165 96.280588,243.303333 C96.280588,240.251045 96.1618878,230.167899 96.106777,219.472176 C60.4967585,227.215235 52.9826207,204.369712 52.9826207,204.369712 C47.1599584,189.574598 38.770408,185.640538 38.770408,185.640538 C27.1568785,177.696113 39.6458206,177.859325 39.6458206,177.859325 C52.4993419,178.762293 59.267365,191.04987 59.267365,191.04987 C70.6837675,210.618423 89.2115753,204.961093 96.5158685,201.690482 C97.6647155,193.417512 100.981959,187.77078 104.642583,184.574357 C76.211799,181.33766 46.324819,170.362144 46.324819,121.315702 C46.324819,107.340889 51.3250588,95.9223682 59.5132437,86.9583937 C58.1842268,83.7344152 53.8029229,70.715562 60.7532354,53.0843636 C60.7532354,53.0843636 71.5019501,49.6441813 95.9626412,66.2049595 C106.172967,63.368876 117.123047,61.9465949 128.00106,61.8978432 C138.879073,61.9465949 149.837632,63.368876 160.067033,66.2049595 C184.49805,49.6441813 195.231926,53.0843636 195.231926,53.0843636 C202.199197,70.715562 197.815773,83.7344152 196.486756,86.9583937 C204.694018,95.9223682 209.660343,107.340889 209.660343,121.315702 C209.660343,170.478725 179.716133,181.303747 151.213281,184.472614 C155.80443,188.444828 159.895342,196.234518 159.895342,208.176593 C159.895342,225.303317 159.746968,239.087361 159.746968,243.303333 C159.746968,246.709601 162.05102,250.70089 168.53925,249.443941 C219.370432,232.499507 256,184.536204 256,128.00106 C256,57.3066942 198.691187,0 128.00106,0 Z"/>
+        </symbol>
+    </svg>
+
+    <!-- ===================================================
+         LIENZO ÚNICO PARA TODAS LAS CURVAS BÉZIER
+         (el JS crea un <path> por cada imagen con data-curva)
+         =================================================== -->
+    <svg id="lienzo-curva"></svg>
 
     <header>
         <nav>
@@ -1051,38 +853,48 @@ div.ex2 {
                 <li><a href="#proyectos">Proyectos</a></li>
                 <li><a href="#contacto">Contacto</a></li>
             </ul>
-
         </nav>
     </header>
 
-
-       
+    <!-- ===================================================
+         INICIO
+         =================================================== -->
     <section id="inicio" class="hero">
-        <!-- Columna del margen izquierdo -->
+
+        <!-- Gatos del margen izquierdo -->
         <div class="columna-margen margen-izquierdo">
-        <img src="gato.png" alt="Decoración">
-        <img src="gato.png" alt="Decoración">
-        <img src="gato.png" alt="Decoración">
-          <img src="gato.png" alt="Decoración">
-        <img src="gato.png" alt="Decoración">
-        <img src="gato.png" alt="Decoración">
-        <img src="gato.png" alt="Decoración">
-        <img src="gato.png" alt="Decoración">
+            <img src="gato.png" alt="Decoración">
+            <img src="gato.png" alt="Decoración">
+            <img src="gato.png" alt="Decoración">
+            <img src="gato.png" alt="Decoración">
+            <img src="gato.png" alt="Decoración">
+            <img src="gato.png" alt="Decoración">
+            <img src="gato.png" alt="Decoración">
+            <img src="gato.png" alt="Decoración">
         </div>
 
-        <!-- Columna del margen derecho -->
+        <!-- Gatos del margen derecho -->
         <div class="columna-margen margen-derecho">
-        <img src="gato.png" alt="Decoración">
-        <img src="gato.png" alt="Decoración">
-        <img src="gato.png" alt="Decoración">
-             <img src="gato.png" alt="Decoración">
-        <img src="gato.png" alt="Decoración">
-        <img src="gato.png" alt="Decoración">
-        <img src="gato.png" alt="Decoración">
-        <img src="gato.png" alt="Decoración">
+            <img src="gato.png" alt="Decoración">
+            <img src="gato.png" alt="Decoración">
+            <img src="gato.png" alt="Decoración">
+            <img src="gato.png" alt="Decoración">
+            <img src="gato.png" alt="Decoración">
+            <img src="gato.png" alt="Decoración">
+            <img src="gato.png" alt="Decoración">
+            <img src="gato.png" alt="Decoración">
         </div>
 
-         <div class="hero-content">
+        <div class="hero-content">
+
+            <!-- ★ Chincheta del título (descomenta para activarla):
+            <img src="chincheta.png" alt="Chincheta" class="foto-superior" data-curva data-inicio="izquierda"
+                 style="--top: -20px; --left: 30px; --rot: -15deg;">
+            --><img src="chincheta.png" class="foto-superior" id="pin-hero0" data-curva data-inicio="derecha"
+            style="--left: calc(100% - 26px - var(--tam) / 2); --top: calc(100% - 5px - var(--tam) / 2); --rot: -90deg;">
+
+            <img src="chincheta.png" class="foto-superior" id="pin-hero" data-conecta="pin-hero0"
+                style="--left: calc(min(275px, 100% - 10px) - var(--tam) / 2); --top: calc(100% + 105px - var(--tam) / 2); --rot: 0deg;">
 
     <h1>¡Hola, somos <span>DigitBomb Studios!</span></h1>
 
@@ -1096,465 +908,397 @@ div.ex2 {
 </div>
     </section>
 
-     <!-------MUSIC PLAYER BY GLENTHEMES------->
-        <div id="glenplayer02">
+    <!-------MUSIC PLAYER BY GLENTHEMES------->
+    <div id="glenplayer02">
         <div class="ex2">
-        <div class="music-controls" onclick="songstart();">
-        <div class="playy">►</div>
-        <div class="pausee">❚❚</div>
+            <div class="music-controls" onclick="songstart();">
+                <div class="playy">►</div>
+                <div class="pausee">❚❚</div>
+            </div>
+            <div class="sonata"> </div>
+            <div class="labeltext">CATNOIR OST</div>
         </div>
-        <div class="sonata"> </div>
-        <div class="labeltext">CATNOIR OST</div>
-        </div><!--end music player-->
-        </div>
-        
-        <audio id="tune" src="music.mp3"audio"></audio>
+    </div>
+    <audio id="tune" src="music.mp3"></audio>
 
-
+    <!-- ===================================================
+         SOBRE NOSOTROS
+         =================================================== -->
     <section id="sobre-mi" class="about-section">
 
-    <h2 class="section-title">Sobre Nosotros</h2>
+        <h2 class="section-title">Sobre Nosotros</h2>
 
-    <div class="grid">
+        <div class="grid">
 
-        <div class="card about-card">
+            <!-- ───────── VICTOR ───────── -->
+            <div class="card about-card">
 
-            <h3>Victor Santiago Gil Torres</h3>
+                <!-- ★ Chincheta con curva. Opciones (todas opcionales):
+                     data-inicio="izquierda | derecha | arriba | abajo"   lateral de salida (centrado)
+                     data-inicio="izquierda:0.3"                          lateral + posición (0 = inicio, 1 = final del borde)
+                     data-conecta="id-de-otra-chincheta"                  en vez de salir de un lateral, se une a otra chincheta
+                     data-color="#ff4500"                                 color de la línea
+                     data-tension="0.35"                                  0 = línea recta; más alto = más curvada
+                     style="--top:20px; --left:20px; --rot:0deg; --ancho:90px;
+                            --top-m:10px; --ancho-m:50px"                 posición/rotación/tamaño (-m = solo móvil) -->
+                <img src="chincheta.png" class="foto-superior" id="pin-hero1" data-conecta="pin-hero"
+                style="--left: calc(100% - 12px - var(--tam) / 2); --top: calc(40px - var(--tam) / 2); --rot: -85deg;
+                       --left-m: calc(100% - 16px - var(--tam) / 2); --top-m: calc(0px - var(--tam) / 2);">
 
-            <img src="vitin.jpeg" class="images">
+                <h3>Victor Santiago Gil Torres</h3>
 
-            <p style="text-align: center;">
-                <b>Programador y Compositor</b>
-            </p>
+                <img src="vitin.jpeg" class="images" alt="Victor Santiago Gil Torres">
 
-            <div class="card-extra">
+                <p style="text-align: center;"><b>Programador y Compositor</b></p>
 
-                <p>
-                    Actualmente estoy estudiando Diseño y Desarrollo
-                    de Videojuegos y trabajo principalmente con Unity.
-                </p>
-
-                <p>
-                    Me interesa especialmente el diseño de gameplay,
-                    la programación y la creación de experiencias
-                    narrativas.
-                </p>
-
-             </div>  
-            <div class="social-links-container">
-
-            <!-- Instagram -->
-          <!-- From Uiverse.io by vinodjangid07 --> 
-                <div class="tooltip-container";>
-                <div class="tooltip">
-                    <div class="profile">
-                    <div class="user">
-                <div class="img">
-                        <img src="vitin1.jpeg" class="img">
-                    </div>
-                        <div class="details">
-                        <div class="name">Victsantgt</div>
-                        <div class="username">@victsantgt</div>
-                        </div>
-                    </div>
-                    <div class="about">2 Oyentes mesuales</div>
-                    </div>
+                <div class="card-extra">
+                    <p>
+                        Actualmente estoy estudiando Diseño y Desarrollo
+                        de Videojuegos y trabajo principalmente con Unity.
+                    </p>
+                    <p>
+                        Me interesa especialmente el diseño de gameplay,
+                        la programación y la creación de experiencias
+                        narrativas.
+                    </p>
                 </div>
-                <div class="text">
-                    <a class="icon"  href="https://open.spotify.com/intl-es/artist/1xuKelePze1BmLCzUKvtTy" 
-                    target="_blank"
-                    rel="noopener noreferrer">
-                    <div class="layer">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span class="instagramSVG">
-                            <img src="spotify.svg" class="svgIcon1" alt="Icono">
-                        </span>
-                        </div>
-                    </a>
-                </div>
-            </div>
 
-            <!-- LinkedIn -->
-            <div class="tooltip-container">
-                <div class="tooltip">
-                    <div class="profile">
-                        <div class="user">
-                            <div class="img">
-                        <img src="vitin.jpeg" class="img">
-                    </div>
-                            <div class="details">
-                                <div class="name">Victor Santiago</div>
-                                <div class="username">Gil Torres</div>
+                <div class="social-links-container">
+
+                    <!-- Spotify -->
+                    <div class="tooltip-container">
+                        <div class="tooltip">
+                            <div class="profile">
+                                <div class="user">
+                                    <div class="img"><img src="vitin1.jpeg" class="img" alt=""></div>
+                                    <div class="details">
+                                        <div class="name">Victsantgt</div>
+                                        <div class="username">@victsantgt</div>
+                                    </div>
+                                </div>
+                                <div class="about">2 Oyentes mensuales</div>
                             </div>
                         </div>
-                        <div class="about">Estudiante en URJC</div>
-                    </div>
-                </div>
-               <div class="text">
-                    <a class="icon"  href="https://www.linkedin.com/in/victor-santiago-gil-torres-664898389" 
-                    target="_blank"
-                    rel="noopener noreferrer">
-                    <div class="layer">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span class="fab fa-linkedin">
-                                <svg viewBox="0 0 448 512" height="1em" fill="#0A66C2">
-                                    <path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"></path>
-                                </svg>
-                            </span>
+                        <div class="text">
+                            <a class="icon" href="https://open.spotify.com/intl-es/artist/1xuKelePze1BmLCzUKvtTy" target="_blank" rel="noopener noreferrer">
+                                <div class="layer">
+                                    <span></span><span></span><span></span><span></span>
+                                    <span class="instagramSVG">
+                                        <img src="spotify.svg" class="svgIcon1" alt="Spotify">
+                                    </span>
+                                </div>
+                            </a>
                         </div>
-                    </a>
+                    </div>
+
+                    <!-- LinkedIn -->
+                    <div class="tooltip-container">
+                        <div class="tooltip">
+                            <div class="profile">
+                                <div class="user">
+                                    <div class="img"><img src="vitin.jpeg" class="img" alt=""></div>
+                                    <div class="details">
+                                        <div class="name">Victor Santiago</div>
+                                        <div class="username">Gil Torres</div>
+                                    </div>
+                                </div>
+                                <div class="about">Estudiante en URJC</div>
+                            </div>
+                        </div>
+                        <div class="text">
+                            <a class="icon" href="https://www.linkedin.com/in/victor-santiago-gil-torres-664898389" target="_blank" rel="noopener noreferrer">
+                                <div class="layer">
+                                    <span></span><span></span><span></span><span></span>
+                                    <span class="fab fa-linkedin">
+                                        <svg viewBox="0 0 448 512" height="1em" fill="#0A66C2"><use href="#i-linkedin"/></svg>
+                                    </span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- X / Twitter -->
+                    <div class="tooltip-container">
+                        <div class="tooltip">
+                            <div class="profile">
+                                <div class="user">
+                                    <div class="img"><img src="https://pbs.twimg.com/profile_images/1833838024397922304/yEldQtWF_400x400.jpg" class="img" alt=""></div>
+                                    <div class="details">
+                                        <div class="name">Victsantgt</div>
+                                        <div class="username">@victsantgt</div>
+                                    </div>
+                                </div>
+                                <div class="about"></div>
+                            </div>
+                        </div>
+                        <div class="text">
+                            <a class="icon" href="https://x.com/victsantgt" target="_blank" rel="noopener noreferrer">
+                                <div class="layer">
+                                    <span></span><span></span><span></span><span></span>
+                                    <span class="fab fa-x">
+                                        <svg viewBox="0 0 512 512" height="1em" fill="white"><use href="#i-x"/></svg>
+                                    </span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <!-- X / Twitter -->
-            <div class="tooltip-container">
-                <div class="tooltip">
-                    <div class="profile">
-                        <div class="user">
-                            <div class="img">
-                        <img src="https://pbs.twimg.com/profile_images/1833838024397922304/yEldQtWF_400x400.jpg" class="img">
-                        </div>
-                            <div class="details">
-                                <div class="name">Victsantgt</div>
-                                <div class="username">@victsantgt</div>
+            <!-- ───────── SERGIO ───────── -->
+            <div class="card about-card">
+
+                <!-- ★ Para añadir otra curva aquí, descomenta esta línea:
+                <img src="chincheta.png" alt="Chincheta" class="foto-superior" data-curva data-inicio="derecha">
+                --><img src="chincheta.png" class="foto-superior" data-conecta="pin-hero1"
+                style="--left: calc(20px - var(--tam) / 2); --top: 430px; --rot: -85deg;
+                --left-m: calc(100% - 16px - var(--tam) / 2); --top-m: calc(0px - var(--tam) / 2);">
+
+                <h3>Sergio Ponce García</h3>
+
+                <img src="sergio.jpeg" class="images" alt="Sergio Ponce García">
+
+                <p style="text-align: center;"><b>Artista 3D y UI/UX</b></p>
+
+                <div class="card-extra">
+                    <p><strong>Programación:</strong> C#, C++, JavaScript, HTML y CSS.</p>
+                    <p><strong>Game Development:</strong> Unity, sistemas de gameplay, UI, animación e integración de audio.</p>
+                    <p><strong>Herramientas:</strong> Git, GitHub, Visual Studio y herramientas de diseño.</p>
+                </div>
+
+                <div class="social-links-container">
+
+                    <!-- Instagram -->
+                    <div class="tooltip-container">
+                        <div class="tooltip">
+                            <div class="profile">
+                                <div class="user">
+                                    <div class="img">
+                                        <img src="https://scontent.cdninstagram.com/v/t51.2885-19/487153007_2135235576907189_7744517984761122873_n.jpg?stp=dst-jpg_s150x150_tt6&_nc_cat=102&ccb=7-5&_nc_sid=f7ccc5&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy4xMDgwLkMzIn0%3D&_nc_ohc=DV1b9Pi5GVIQ7kNvwHY7ube&_nc_oc=AdphjeYgD-zYu4lp6j4Jb1QUUhsANA3foI08ibWK-V0qGwes-BNwxDkLX73FAC6YfrQ&_nc_zt=24&_nc_ht=scontent.cdninstagram.com&_nc_ss=79689&oh=00_AQK7Cj5BzKh565Zf3wsLnrGQPRyMyi6AuMgU8Qa-raKAfA&oe=6AB5F4FF" class="img" alt="">
+                                    </div>
+                                    <div class="details">
+                                        <div class="name">Victsantgt</div>
+                                        <div class="username">@victsantgt</div>
+                                    </div>
+                                </div>
+                                <div class="about">Cuenta Personal</div>
                             </div>
                         </div>
-                        <div class="about"></div>
+                        <div class="text">
+                            <a class="icon" href="https://www.instagram.com/victsantgt/" target="_blank" rel="noopener noreferrer">
+                                <div class="layer">
+                                    <span></span><span></span><span></span><span></span>
+                                    <span class="instagramSVG">
+                                        <svg class="svgIcon" viewBox="0 0 448 512" height="1.5em" fill="white"><use href="#i-instagram"/></svg>
+                                    </span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- LinkedIn (pendiente de rellenar) -->
+                    <div class="tooltip-container">
+                        <div class="tooltip">
+                            <div class="profile">
+                                <div class="user">
+                                    <div class="img">Ui</div>
+                                    <div class="details">
+                                        <div class="name">User</div>
+                                        <div class="username">@username</div>
+                                    </div>
+                                </div>
+                                <div class="about">500+ Connections</div>
+                            </div>
+                        </div>
+                        <div class="text">
+                            <a class="icon" href="#">
+                                <div class="layer">
+                                    <span></span><span></span><span></span><span></span>
+                                    <span class="fab fa-linkedin">
+                                        <svg viewBox="0 0 448 512" height="1em" fill="#0A66C2"><use href="#i-linkedin"/></svg>
+                                    </span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- ArtStation (TODO: el enlace todavía apunta al X de Victor) -->
+                    <div class="tooltip-container">
+                        <div class="tooltip">
+                            <div class="profile">
+                                <div class="user">
+                                    <div class="img"><img src="https://pbs.twimg.com/profile_images/1833838024397922304/yEldQtWF_400x400.jpg" class="img" alt=""></div>
+                                    <div class="details">
+                                        <div class="name">Victsantgt</div>
+                                        <div class="username">@victsantgt</div>
+                                    </div>
+                                </div>
+                                <div class="about"></div>
+                            </div>
+                        </div>
+                        <div class="text">
+                            <a class="icon" href="https://x.com/victsantgt" target="_blank" rel="noopener noreferrer">
+                                <div class="layer">
+                                    <span></span><span></span><span></span><span></span>
+                                    <span class="instagramSVG">
+                                        <img src="artstation.svg" class="svgIcon1" alt="ArtStation">
+                                    </span>
+                                </div>
+                            </a>
+                        </div>
                     </div>
                 </div>
-                     <div class="text">
-                        <a class="icon"  href="https://x.com/victsantgt" 
-                        target="_blank"
-                        rel="noopener noreferrer">
-                            <div class="layer">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span class="fab fa-x">
-                                <svg viewBox="0 0 512 512" height="1em" fill="white">
-                                    <path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48h145.6l100.5 132.9L389.2 48zm-24.8 373.8h39.1L151.1 88.0h-42L364.4 421.8z"/>
-                                </svg>
-                            </span>
+            </div>
+
+            <!-- ───────── LUCAS ───────── -->
+            <div class="card about-card">
+
+                <h3>Lucas Joglar Liebana</h3>
+
+                <img src="lucas.jpeg" class="images" alt="Lucas Joglar Liebana">
+
+                <p style="text-align: center;"><b>Programador</b></p>
+
+                <div class="card-extra">
+                    <p><strong>Programación:</strong> C#, C++, JavaScript, HTML y CSS.</p>
+                    <p><strong>Game Development:</strong> Unity, sistemas de gameplay, UI, animación e integración de audio.</p>
+                    <p><strong>Herramientas:</strong> Git, GitHub, Visual Studio y herramientas de diseño.</p>
+                </div>
+
+                <div class="social-links-container">
+
+                    <!-- LinkedIn (pendiente de rellenar) -->
+                    <div class="tooltip-container">
+                        <div class="tooltip">
+                            <div class="profile">
+                                <div class="user">
+                                    <div class="img">Ui</div>
+                                    <div class="details">
+                                        <div class="name">User</div>
+                                        <div class="username">@username</div>
+                                    </div>
+                                </div>
+                                <div class="about">500+ Connections</div>
+                            </div>
                         </div>
-                    </a>
+                        <div class="text">
+                            <a class="icon" href="#">
+                                <div class="layer">
+                                    <span></span><span></span><span></span><span></span>
+                                    <span class="fab fa-linkedin">
+                                        <svg viewBox="0 0 448 512" height="1em" fill="#0A66C2"><use href="#i-linkedin"/></svg>
+                                    </span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- GitHub (pendiente de rellenar) -->
+                    <div class="tooltip-container">
+                        <div class="tooltip">
+                            <div class="profile">
+                                <div class="user">
+                                    <div class="img">Ui</div>
+                                    <div class="details">
+                                        <div class="name">User</div>
+                                        <div class="username">@username</div>
+                                    </div>
+                                </div>
+                                <div class="about">500+ Connections</div>
+                            </div>
+                        </div>
+                        <div class="text">
+                            <a class="icon" href="#">
+                                <div class="layer">
+                                    <span></span><span></span><span></span><span></span>
+                                    <span class="fab fa-x">
+                                        <svg viewBox="0 0 256 250" height="1.2em" fill="white"><use href="#i-github"/></svg>
+                                    </span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
+
         </div>
-    </div>
+    </section>
 
-
-        <div class="card about-card">
-
-            <h3>Sergio Ponce García</h3>
-
-            <img src="sergio.jpeg" class="images">
-
-            <p style="text-align: center;">
-                <b>Artista 3D y UI/UX</b>
-            </p>
-            <div class="card-extra">
-
-                <p>
-                    <strong>Programación:</strong>
-                    C#, C++, JavaScript, HTML y CSS.
-                </p>
-
-                <p>
-                    <strong>Game Development:</strong>
-                    Unity, sistemas de gameplay, UI, animación
-                    e integración de audio.
-                </p>
-
-                <p>
-                    <strong>Herramientas:</strong>
-                    Git, GitHub, Visual Studio y herramientas
-                    de diseño.
-                </p>
-
-             </div>  
-            <div class="social-links-container">
-
-            <!-- Instagram -->
-          <!-- From Uiverse.io by vinodjangid07 --> 
-                <div class="tooltip-container";>
-                <div class="tooltip">
-                    <div class="profile">
-                    <div class="user">
-                <div class="img">
-                        <img src="https://scontent.cdninstagram.com/v/t51.2885-19/487153007_2135235576907189_7744517984761122873_n.jpg?stp=dst-jpg_s150x150_tt6&_nc_cat=102&ccb=7-5&_nc_sid=f7ccc5&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy4xMDgwLkMzIn0%3D&_nc_ohc=DV1b9Pi5GVIQ7kNvwHY7ube&_nc_oc=AdphjeYgD-zYu4lp6j4Jb1QUUhsANA3foI08ibWK-V0qGwes-BNwxDkLX73FAC6YfrQ&_nc_zt=24&_nc_ht=scontent.cdninstagram.com&_nc_ss=79689&oh=00_AQK7Cj5BzKh565Zf3wsLnrGQPRyMyi6AuMgU8Qa-raKAfA&oe=6AB5F4FF" class="img">
-                    </div>
-                        <div class="details">
-                        <div class="name">Victsantgt</div>
-                        <div class="username">@victsantgt</div>
-                        </div>
-                    </div>
-                    <div class="about">Cuenta Personal</div>
-                    </div>
-                </div>
-                <div class="text">
-                    <a class="icon"  href="https://www.instagram.com/victsantgt/" 
-                    target="_blank"
-                    rel="noopener noreferrer">
-                    <div class="layer">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span class="instagramSVG">
-                        <svg
-                            fill="white"
-                            class="svgIcon"
-                            viewBox="0 0 448 512"
-                            height="1.5em"
-                            xmlns="http://www.w3.org/2000/svg"
-                        >
-                            <path
-                            d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"
-                            ></path>
-                        </svg>
-                            </span>
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <!-- LinkedIn -->
-            <div class="tooltip-container">
-                <div class="tooltip">
-                    <div class="profile">
-                        <div class="user">
-                            <div class="img">Ui</div>
-                            <div class="details">
-                                <div class="name">User</div>
-                                <div class="username">@username</div>
-                            </div>
-                        </div>
-                        <div class="about">500+ Connections</div>
-                    </div>
-                </div>
-                <div class="text">
-                    <a class="icon" href="#">
-                        <div class="layer">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span class="fab fa-linkedin">
-                                <svg viewBox="0 0 448 512" height="1em" fill="#0A66C2">
-                                    <path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"></path>
-                                </svg>
-                            </span>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <!-- X / Twitter -->
-            <div class="tooltip-container">
-                <div class="tooltip">
-                    <div class="profile">
-                        <div class="user">
-                            <div class="img">
-                        <img src="https://pbs.twimg.com/profile_images/1833838024397922304/yEldQtWF_400x400.jpg" class="img">
-                        </div>
-                            <div class="details">
-                                <div class="name">Victsantgt</div>
-                                <div class="username">@victsantgt</div>
-                            </div>
-                        </div>
-                        <div class="about"></div>
-                    </div>
-                </div>
-                     <div class="text">
-                        <a class="icon"  href="https://x.com/victsantgt" 
-                        target="_blank"
-                        rel="noopener noreferrer">
-                            <div class="layer">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                                         <span class="instagramSVG">
-                            <img src="artstation.svg" class="svgIcon1" alt="Icono">
-                        </span>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-        <div class="card about-card">
-
-            <h3>Lucas Joglar Liebana</h3>
-
-            <img src="lucas.jpeg" class="images">
-
-             <p style="text-align: center;">
-                <b>Programador</b>
-            </p>
-
-            <div class="card-extra">
-
-                <p>
-                    <strong>Programación:</strong>
-                    C#, C++, JavaScript, HTML y CSS.
-                </p>
-
-                <p>
-                    <strong>Game Development:</strong>
-                    Unity, sistemas de gameplay, UI, animación
-                    e integración de audio.
-                </p>
-
-                <p>
-                    <strong>Herramientas:</strong>
-                    Git, GitHub, Visual Studio y herramientas
-                    de diseño.
-                </p>
-
-            </div>  
-            <div class="social-links-container">
-
-            <!-- LinkedIn -->
-            <div class="tooltip-container">
-                <div class="tooltip">
-                    <div class="profile">
-                        <div class="user">
-                            <div class="img">Ui</div>
-                            <div class="details">
-                                <div class="name">User</div>
-                                <div class="username">@username</div>
-                            </div>
-                        </div>
-                        <div class="about">500+ Connections</div>
-                    </div>
-                </div>
-                <div class="text">
-                    <a class="icon" href="#">
-                        <div class="layer">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span class="fab fa-linkedin">
-                                <svg viewBox="0 0 448 512" height="1em" fill="#0A66C2">
-                                    <path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"></path>
-                                </svg>
-                            </span>
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <!-- X / Twitter -->
-            <div class="tooltip-container">
-                <div class="tooltip">
-                    <div class="profile">
-                        <div class="user">
-                            <div class="img">Ui</div>
-                            <div class="details">
-                                <div class="name">User</div>
-                                <div class="username">@username</div>
-                            </div>
-                        </div>
-                        <div class="about">500+ Connections</div>
-                    </div>
-                </div>
-                <div class="text">
-                    <a class="icon" href="#">
-                        <div class="layer">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span class="fab fa-x">
-                               <svg width="256px" height="250px" viewBox="0 0 256 250" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid">
-                                     <path d="M128.00106,0 C57.3172926,0 0,57.3066942 0,128.00106 C0,184.555281 36.6761997,232.535542 87.534937,249.460899 C93.9320223,250.645779 96.280588,246.684165 96.280588,243.303333 C96.280588,240.251045 96.1618878,230.167899 96.106777,219.472176 C60.4967585,227.215235 52.9826207,204.369712 52.9826207,204.369712 C47.1599584,189.574598 38.770408,185.640538 38.770408,185.640538 C27.1568785,177.696113 39.6458206,177.859325 39.6458206,177.859325 C52.4993419,178.762293 59.267365,191.04987 59.267365,191.04987 C70.6837675,210.618423 89.2115753,204.961093 96.5158685,201.690482 C97.6647155,193.417512 100.981959,187.77078 104.642583,184.574357 C76.211799,181.33766 46.324819,170.362144 46.324819,121.315702 C46.324819,107.340889 51.3250588,95.9223682 59.5132437,86.9583937 C58.1842268,83.7344152 53.8029229,70.715562 60.7532354,53.0843636 C60.7532354,53.0843636 71.5019501,49.6441813 95.9626412,66.2049595 C106.172967,63.368876 117.123047,61.9465949 128.00106,61.8978432 C138.879073,61.9465949 149.837632,63.368876 160.067033,66.2049595 C184.49805,49.6441813 195.231926,53.0843636 195.231926,53.0843636 C202.199197,70.715562 197.815773,83.7344152 196.486756,86.9583937 C204.694018,95.9223682 209.660343,107.340889 209.660343,121.315702 C209.660343,170.478725 179.716133,181.303747 151.213281,184.472614 C155.80443,188.444828 159.895342,196.234518 159.895342,208.176593 C159.895342,225.303317 159.746968,239.087361 159.746968,243.303333 C159.746968,246.709601 162.05102,250.70089 168.53925,249.443941 C219.370432,232.499507 256,184.536204 256,128.00106 C256,57.3066942 198.691187,0 128.00106,0 Z M47.9405593,182.340212 C47.6586465,182.976105 46.6581745,183.166873 45.7467277,182.730227 C44.8183235,182.312656 44.2968914,181.445722 44.5978808,180.80771 C44.8734344,180.152739 45.876026,179.97045 46.8023103,180.409216 C47.7328342,180.826786 48.2627451,181.702199 47.9405593,182.340212 Z M54.2367892,187.958254 C53.6263318,188.524199 52.4329723,188.261363 51.6232682,187.366874 C50.7860088,186.474504 50.6291553,185.281144 51.2480912,184.70672 C51.8776254,184.140775 53.0349512,184.405731 53.8743302,185.298101 C54.7115892,186.201069 54.8748019,187.38595 54.2367892,187.958254 Z M58.5562413,195.146347 C57.7719732,195.691096 56.4895886,195.180261 55.6968417,194.042013 C54.9125733,192.903764 54.9125733,191.538713 55.713799,190.991845 C56.5086651,190.444977 57.7719732,190.936735 58.5753181,192.066505 C59.3574669,193.22383 59.3574669,194.58888 58.5562413,195.146347 Z M65.8613592,203.471174 C65.1597571,204.244846 63.6654083,204.03712 62.5716717,202.981538 C61.4524999,201.94927 61.1409122,200.484596 61.8446341,199.710926 C62.5547146,198.935137 64.0575422,199.15346 65.1597571,200.200564 C66.2704506,201.230712 66.6095936,202.705984 65.8613592,203.471174 Z M75.3025151,206.281542 C74.9930474,207.284134 73.553809,207.739857 72.1039724,207.313809 C70.6562556,206.875043 69.7087748,205.700761 70.0012857,204.687571 C70.302275,203.678621 71.7478721,203.20382 73.2083069,203.659543 C74.6539041,204.09619 75.6035048,205.261994 75.3025151,206.281542 Z M86.046947,207.473627 C86.0829806,208.529209 84.8535871,209.404622 83.3316829,209.4237 C81.8013,209.457614 80.563428,208.603398 80.5464708,207.564772 C80.5464708,206.498591 81.7483088,205.631657 83.2786917,205.606221 C84.8005962,205.576546 86.046947,206.424403 86.046947,207.473627 Z M96.6021471,207.069023 C96.7844366,208.099171 95.7267341,209.156872 94.215428,209.438785 C92.7295577,209.710099 91.3539086,209.074206 91.1652603,208.052538 C90.9808515,206.996955 92.0576306,205.939253 93.5413813,205.66582 C95.054807,205.402984 96.4092596,206.021919 96.6021471,207.069023 Z" fill="white"></path>
-                                </svg>
-                            </span>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-</section>
-
+    <!-- ===================================================
+         PROYECTOS
+         =================================================== -->
     <section id="proyectos">
         <h2 class="section-title">Nuestros Proyectos</h2>
+
         <div>
-            <img src="catnoir.png" class="catnoir-img">
+            <img src="catnoir.png" class="catnoir-img" alt="Cat Noir">
         </div>
+
         <div class="grid">
 
             <div class="card">
-                <p style = "text-align: justify;">Ponte en los pies del mejor detective de toda la ciudad. Encuentra pistas, resuelve enigmas y avanza en una historia que guarda un oscuro y extraño secreto. Coge tu linterna, gabardina y adéntrate en el misterio que rodea a toda esta historia.</p>
-            <!-- Slideshow container -->
-        <div class="slideshow-container">
+                <p style="text-align: justify;">
+                    Ponte en los pies del mejor detective de toda la ciudad. Encuentra pistas, resuelve enigmas
+                    y avanza en una historia que guarda un oscuro y extraño secreto. Coge tu linterna, gabardina
+                    y adéntrate en el misterio que rodea a toda esta historia.
+                </p>
 
-        <!-- Full-width images with number and caption text -->
-        <div class="mySlides fade">
-            <img src="cap (1).png" style="width:100%">
-        </div>
+                <!-- Slideshow -->
+                <div class="slideshow-container">
+                    <div class="mySlides"><img src="cap (1).png" alt="Captura 1"></div>
+                    <div class="mySlides"><img src="cap (2).png" alt="Captura 2"></div>
+                    <div class="mySlides"><img src="cap (3).png" alt="Captura 3"></div>
+                    <div class="mySlides"><img src="cap (4).png" alt="Captura 4"></div>
+                    <div class="mySlides"><img src="cap (5).png" alt="Captura 5"></div>
 
-        <div class="mySlides fade">
-            <img src="cap (2).png" style="width:100%">
-        </div>
+                    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                </div>
+                <br>
 
-        <div class="mySlides fade">
-            <img src="cap (3).png" style="width:100%">
-        </div>
-
-        <div class="mySlides fade">
-            <img src="cap (4).png" style="width:100%">
-        </div>
-
-        <div class="mySlides fade">
-            <img src="cap (5).png" style="width:100%">
-        </div>
-
-        <!-- Next and previous buttons -->
-        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-        <a class="next" onclick="plusSlides(1)">&#10095;</a>
-        </div>
-        <br>
-
-        <!-- The dots/circles -->
-        <div style="text-align:center">
-        <span class="dot" onclick="currentSlide(1)"></span>
-        <span class="dot" onclick="currentSlide(2)"></span>
-        <span class="dot" onclick="currentSlide(3)"></span>
-        <span class="dot" onclick="currentSlide(4)"></span>
-        <span class="dot" onclick="currentSlide(5)"></span>
-        </div>
+                <div style="text-align:center">
+                    <span class="dot" onclick="currentSlide(1)"></span>
+                    <span class="dot" onclick="currentSlide(2)"></span>
+                    <span class="dot" onclick="currentSlide(3)"></span>
+                    <span class="dot" onclick="currentSlide(4)"></span>
+                    <span class="dot" onclick="currentSlide(5)"></span>
+                </div>
             </div>
+
             <div class="card">
-            <div class="trailer">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/rFm12MLvxGI?si=i9CAJt4EexUMvuqn" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-    </div>
-    <p style = "text-align: justify; margin-top: 50px; margin-bottom: 50px;">Para avanzar, necesitarás reunir pistas, hablar con curiosos personajes, y responder los misterios que te plantee el mundo. ¿Serás capaz de llegar a la verdad?</p>
-        <a href="https://squeakyboy.itch.io/catnoir">
-            <button class="btn-wide">
-                <span class="button_itch">Descubre más en itch.io</span>
-            </button>
-        </a>
-    </div>
+                <div class="trailer">
+                    <iframe width="560" height="315"
+                        src="https://www.youtube.com/embed/rFm12MLvxGI?si=i9CAJt4EexUMvuqn"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+
+                <p style="text-align: justify; margin-top: 50px; margin-bottom: 50px;">
+                    Para avanzar, necesitarás reunir pistas, hablar con curiosos personajes, y responder los
+                    misterios que te plantee el mundo. ¿Serás capaz de llegar a la verdad?
+                </p>
+
+                <a href="https://squeakyboy.itch.io/catnoir">
+                    <button class="btn-wide">
+                        <span class="button_itch">Descubre más en itch.io</span>
+                    </button>
+                </a>
+            </div>
+
         </div>
-        
     </section>
 
+    <!-- ===================================================
+         CONTACTO
+         =================================================== -->
     <section id="contacto">
         <h2 class="section-title">Contacto</h2>
-        <p class="contact-info">Si te interesa nuestro trabajo y quieres conocer más, o simplemente quieres charlar o tienes una pregunta, escríbenos a <b>digit.bomb8@gmail.com</b> o síguenos en nuestras redes:</p>
-        
+        <p class="contact-info">
+            Si te interesa nuestro trabajo y quieres conocer más, o simplemente quieres charlar o tienes una
+            pregunta, escríbenos a <b>digit.bomb8@gmail.com</b> o síguenos en nuestras redes:
+        </p>
+
         <div class="social-links-container">
 
             <!-- Instagram -->
@@ -1574,14 +1318,9 @@ div.ex2 {
                 <div class="text">
                     <a class="icon" href="#">
                         <div class="layer">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
+                            <span></span><span></span><span></span><span></span>
                             <span class="instagramSVG">
-                                <svg fill="white" class="svgIcon" viewBox="0 0 448 512" height="1.5em" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"></path>
-                                </svg>
+                                <svg class="svgIcon" viewBox="0 0 448 512" height="1.5em" fill="white"><use href="#i-instagram"/></svg>
                             </span>
                         </div>
                     </a>
@@ -1605,14 +1344,9 @@ div.ex2 {
                 <div class="text">
                     <a class="icon" href="#">
                         <div class="layer">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
+                            <span></span><span></span><span></span><span></span>
                             <span class="fab fa-linkedin">
-                                <svg viewBox="0 0 448 512" height="1em" fill="#0A66C2">
-                                    <path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"></path>
-                                </svg>
+                                <svg viewBox="0 0 448 512" height="1em" fill="#0A66C2"><use href="#i-linkedin"/></svg>
                             </span>
                         </div>
                     </a>
@@ -1636,58 +1370,154 @@ div.ex2 {
                 <div class="text">
                     <a class="icon" href="#">
                         <div class="layer">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
+                            <span></span><span></span><span></span><span></span>
                             <span class="fab fa-x">
-                                <svg viewBox="0 0 512 512" height="1em" fill="white">
-                                    <path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48h145.6l100.5 132.9L389.2 48zm-24.8 373.8h39.1L151.1 88.0h-42L364.4 421.8z"/>
-                                </svg>
+                                <svg viewBox="0 0 512 512" height="1em" fill="white"><use href="#i-x"/></svg>
                             </span>
                         </div>
                     </a>
                 </div>
             </div>
         </div>
-
     </section>
-    
-   
 
     <footer>
         <p>&copy; 2026 DigitBombStudios. Con mucho amor.</p>
     </footer>
 
+    <!-- ===================================================
+         SLIDESHOW
+         =================================================== -->
     <script>
         let slideIndex = 1;
         showSlides(slideIndex);
 
-        // Next/previous controls
-        function plusSlides(n) {
-        showSlides(slideIndex += n);
-        }
-
-        // Thumbnail image controls
-        function currentSlide(n) {
-        showSlides(slideIndex = n);
-        }
+        function plusSlides(n)   { showSlides(slideIndex += n); }
+        function currentSlide(n) { showSlides(slideIndex = n); }
 
         function showSlides(n) {
-        let i;
-        let slides = document.getElementsByClassName("mySlides");
-        let dots = document.getElementsByClassName("dot");
-        if (n > slides.length) {slideIndex = 1}
-        if (n < 1) {slideIndex = slides.length}
-        for (i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
+            const slides = document.getElementsByClassName("mySlides");
+            const dots = document.getElementsByClassName("dot");
+
+            if (n > slides.length) slideIndex = 1;
+            if (n < 1) slideIndex = slides.length;
+
+            for (const slide of slides) slide.style.display = "none";
+            for (const dot of dots) dot.classList.remove("active");
+
+            slides[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].classList.add("active");
         }
-        for (i = 0; i < dots.length; i++) {
-            dots[i].className = dots[i].className.replace(" active", "");
-        }
-        slides[slideIndex-1].style.display = "block";
-        dots[slideIndex-1].className += " active";
-        }
+    </script>
+
+    <!-- ===================================================
+         CURVAS BÉZIER: una por cada elemento con data-curva o data-conecta
+         =================================================== -->
+    <script>
+        (function () {
+            const SVG_NS = 'http://www.w3.org/2000/svg';
+            const lienzo = document.getElementById('lienzo-curva');
+
+            // Dirección de salida según el lateral elegido
+            const LATERALES = {
+                izquierda: { dx:  1, dy:  0 },
+                derecha:   { dx: -1, dy:  0 },
+                arriba:    { dx:  0, dy:  1 },
+                abajo:     { dx:  0, dy: -1 }
+            };
+
+            // Lee data-inicio: "izquierda", "derecha:0.3", "arriba:0.8" o "0,0.5" (X,Y en fracciones)
+            function leerInicio(texto) {
+                texto = (texto || 'izquierda').trim();
+                const partes = texto.split(':');
+                const nombre = partes[0];
+                if (LATERALES[nombre]) {
+                    const pos = partes[1] !== undefined ? Number(partes[1]) : 0.5;
+                    const horizontal = nombre === 'izquierda' || nombre === 'derecha';
+                    return {
+                        fx: horizontal ? (nombre === 'izquierda' ? 0 : 1) : pos,
+                        fy: horizontal ? pos : (nombre === 'arriba' ? 0 : 1),
+                        dir: LATERALES[nombre]
+                    };
+                }
+                const xy = texto.split(',').map(Number);          // formato antiguo "X,Y"
+                return { fx: xy[0], fy: xy[1], dir: xy[0] > 0.5 ? LATERALES.derecha : LATERALES.izquierda };
+            }
+
+            const curvas = Array.from(document.querySelectorAll('[data-curva], [data-conecta]')).map(function (pin) {
+                const path = document.createElementNS(SVG_NS, 'path');
+                path.setAttribute('fill', 'none');
+                path.setAttribute('stroke', pin.dataset.color || '#ff4500');
+                path.setAttribute('stroke-width', '3');
+                path.setAttribute('stroke-dasharray', '5 5');
+                lienzo.appendChild(path);
+
+                return {
+                    pin: pin,
+                    path: path,
+                    destino: pin.dataset.conecta ? document.getElementById(pin.dataset.conecta) : null,
+                    inicio: leerInicio(pin.dataset.inicio),
+                    tension: pin.dataset.tension !== undefined ? Number(pin.dataset.tension) : null,
+                    ultimo: ''
+                };
+            });
+
+            function centro(el) {
+                const r = el.getBoundingClientRect();
+                return { x: r.left + r.width / 2, y: r.top + r.height / 2 };
+            }
+
+            function dibujar() {
+                const w = window.innerWidth;
+                const h = window.innerHeight;
+
+                curvas.forEach(function (c) {
+                    const fin = centro(c.pin);
+                    let d;
+
+                    if (c.destino) {
+                        // ── Chincheta ↔ chincheta ──
+                        const ini = centro(c.destino);
+                        const ddx = fin.x - ini.x, ddy = fin.y - ini.y;
+                        const t = c.tension !== null ? c.tension : 0.5;
+                        let c1, c2;
+                        if (Math.abs(ddx) >= Math.abs(ddy)) {      // más horizontal: "S" horizontal
+                            c1 = { x: ini.x + ddx * t, y: ini.y };
+                            c2 = { x: fin.x - ddx * t, y: fin.y };
+                        } else {                                   // más vertical: "S" vertical
+                            c1 = { x: ini.x, y: ini.y + ddy * t };
+                            c2 = { x: fin.x, y: fin.y - ddy * t };
+                        }
+                        d = 'M ' + ini.x + ' ' + ini.y + ' C ' + c1.x + ' ' + c1.y + ', ' + c2.x + ' ' + c2.y + ', ' + fin.x + ' ' + fin.y;
+                    } else {
+                        // ── Lateral de la pantalla → chincheta ──
+                        const i = c.inicio;
+                        const iniX = w * i.fx, iniY = h * i.fy;
+
+                        // Las "asas" de la curva dependen de la distancia real: si la chincheta está
+                        // cerca del punto de salida la curva casi no se dobla (queda tensa).
+                        const t = c.tension !== null ? c.tension : 0.35;
+                        const dist = Math.hypot(fin.x - iniX, fin.y - iniY);
+                        const asa1 = Math.min(dist * t, (i.dir.dx !== 0 ? w : h) * 0.25);
+                        const asa2 = Math.min(dist * t, 100);
+                        const c1x = iniX + i.dir.dx * asa1;
+                        const c1y = iniY + i.dir.dy * asa1;
+                        const c2x = fin.x - i.dir.dx * asa2;
+                        const c2y = fin.y - i.dir.dy * asa2;
+                        d = 'M ' + iniX + ' ' + iniY + ' C ' + c1x + ' ' + c1y + ', ' + c2x + ' ' + c2y + ', ' + fin.x + ' ' + fin.y;
+                    }
+
+                    if (d !== c.ultimo) {                          // solo toca el DOM si algo cambió
+                        c.path.setAttribute('d', d);
+                        c.ultimo = d;
+                    }
+                });
+
+                requestAnimationFrame(dibujar);
+            }
+
+            dibujar();
+        })();
     </script>
 </body>
 </html>
