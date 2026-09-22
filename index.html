@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,>
     <title>DigitBombStudios</title>
     <link rel="icon" type="image/x-icon" href="gato.png">
 
@@ -33,7 +33,6 @@
         }
 
         body {
-            touch-action: pan-x pan-y;
             background-color: var(--bg-color);
             line-height: 1.6;
             overflow-x: hidden;   /* red de seguridad: nada decorativo puede ensanchar la página en móvil */
@@ -1545,13 +1544,18 @@
 </script>
 
 <script>
-    document.addEventListener('touchstart', function (e) {
-    if (e.touches.length > 1) e.preventDefault();
-}, { passive: false });
+if (window.visualViewport) {
+    const lienzo = document.getElementById('lienzo-curva');
 
-document.addEventListener('touchmove', function (e) {
-    if (e.touches.length > 1) e.preventDefault();
-}, { passive: false });
+    function actualizarVisibilidadCurva() {
+        const zoomActivo = window.visualViewport.scale > 1.01;
+        lienzo.style.opacity = zoomActivo ? '0' : '1';
+        lienzo.style.transition = 'opacity 0.25s ease';
+    }
+
+    window.visualViewport.addEventListener('resize', actualizarVisibilidadCurva);
+    window.visualViewport.addEventListener('scroll', actualizarVisibilidadCurva);
+}
 </script>
 </body>
 </html>
