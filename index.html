@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DigitBombStudios</title>
     <link rel="icon" type="image/x-icon" href="gato.png">
 
@@ -795,6 +795,42 @@
         .sonata { margin-left: 10px; color: #222; }
 
         /* =====================================================
+           SELECTOR DE IDIOMA (encima del reproductor de música)
+           ===================================================== */
+        #lang-toggle {
+            position: fixed;
+            bottom: 78px;
+            right: 20px;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            width: fit-content;
+            padding: 6px 10px;
+            background: white;
+            border: 3px double #000;
+            font-family: "Courier New", monospace;
+            font-size: 14px;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        #lang-toggle .lang-option {
+            cursor: pointer;
+            color: #999;
+            transition: color 0.2s ease;
+        }
+
+        #lang-toggle .lang-option.active {
+            color: #000;
+            font-weight: bold;
+        }
+
+        #lang-toggle .lang-option:hover { color: #000; }
+
+        #lang-toggle .lang-sep { color: #ccc; }
+
+        /* =====================================================
            HERO (texto) Y MÓVIL
            ===================================================== */
         @media (max-width: 768px) {
@@ -819,6 +855,8 @@
             .labeltext { font-size: 9px; }
             .playy,
             .pausee { font-size: 15px; }
+
+            #lang-toggle { bottom: 55px; right: 10px; font-size: 11px; padding: 4px 8px; }
         }
     </style>
 </head>
@@ -852,9 +890,9 @@
         <nav>
             <a href="#" class="logo"><img src="logo.png" alt="Logo" class="logo-img">DigitBombStudios</a>
             <ul class="nav-links">
-                <li><a href="#sobre-mi">Sobre Nosotros</a></li>
-                <li><a href="#proyectos">Proyectos</a></li>
-                <li><a href="#contacto">Contacto</a></li>
+                <li><a href="#sobre-mi" data-i18n="nav-about">Sobre Nosotros</a></li>
+                <li><a href="#proyectos" data-i18n="nav-projects">Proyectos</a></li>
+                <li><a href="#contacto" data-i18n="nav-contact">Contacto</a></li>
             </ul>
         </nav>
     </header>
@@ -899,17 +937,24 @@
             <!--<img src="chincheta.png" class="foto-superior" id="pin-hero" data-conecta="pin-hero0"
                 style="--left: calc(min(260px, 100% - 10px) - var(--tam) / 2); --top: calc(100% + 135px - var(--tam) / 2); --rot: 0deg;">
 -->
-    <h1>¡Hola, somos <span>DigitBomb Studios!</span></h1>
+    <h1 data-i18n="hero-title">¡Hola, somos <span>DigitBomb Studios!</span></h1>
 
-    <p>Somos un pequeño estudio indie de Madrid formado por tres alumnos de la Universidad Rey Juan Carlos. Tras ganar la <a href = "https://itch.io/jam/7-edicin-game-jam-game-scholars/entries">7ª Jam de GameScholars</a>, hemos visitado varios eventos como el CyL Games Show, el Guerrilla Game Festival, y próximamente el BCN Game Fest.</p>
+    <p data-i18n="hero-p">Somos un pequeño estudio indie de Madrid formado por tres alumnos de la Universidad Rey Juan Carlos. Tras ganar la <a href = "https://itch.io/jam/7-edicin-game-jam-game-scholars/entries">7ª Jam de GameScholars</a>, hemos visitado varios eventos como el CyL Games Show, el Guerrilla Game Festival, y próximamente el BCN Game Fest.</p>
 
     <a href="#proyectos">
         <button>
-            <span class="button_top">Proyectos</span>
+            <span class="button_top" data-i18n="hero-btn">Proyectos</span>
         </button>
     </a>
 </div>
     </section>
+
+    <!-------SELECTOR DE IDIOMA------->
+    <div id="lang-toggle" role="group" aria-label="Selector de idioma">
+        <span class="lang-option active" data-lang="es" onclick="setLanguage('es')">ES</span>
+        <span class="lang-sep">|</span>
+        <span class="lang-option" data-lang="en" onclick="setLanguage('en')">EN</span>
+    </div>
 
     <!-------MUSIC PLAYER BY GLENTHEMES------->
     <div id="glenplayer02">
@@ -929,7 +974,7 @@
          =================================================== -->
     <section id="sobre-mi" class="about-section">
 
-     <h2 class="section-title">Sobre Nosotros
+     <h2 class="section-title"><span data-i18n="title-about">Sobre Nosotros</span>
         <img src="chincheta.png" class="foto-superior" id="pin-hero" data-conecta="pin-hero0"
          style="--left: calc(100% - 20px - var(--tam) / 2); --top: calc(50% - var(--tam) / 2);">
         </h2>
@@ -955,13 +1000,13 @@
 
                 <img src="vitin.jpeg" class="images" alt="Victor Santiago Gil Torres">
 
-                <p style="text-align: center;"><b>Programador y Compositor</b></p>
+                <p style="text-align: center;"><b data-i18n="victor-role">Programador y Compositor</b></p>
 
                 <div class="card-extra">
-                    <p>
+                    <p data-i18n="victor-p1">
                         Actualmente estoy estudiando 4º de Diseño y Desarrollo de Videojuegos en la URJC. Durante la carrera me he centrado tanto en programación como en diseño de sonido.
                     </p>
-                    <p>
+                    <p data-i18n="victor-p2">
                         Me especializo en Unity (C#), y en FL Studio y Audacity para componer y diseñar efectos de sonido y música.
                     </p>
                 </div>
@@ -979,7 +1024,7 @@
                                         <div class="username">@victsantgt</div>
                                     </div>
                                 </div>
-                                <div class="about">2 Oyentes mensuales</div>
+                                <div class="about" data-i18n="victor-spotify-about">2 Oyentes mensuales</div>
                             </div>
                         </div>
                         <div class="text">
@@ -1005,7 +1050,7 @@
                                         <div class="username">Gil Torres</div>
                                     </div>
                                 </div>
-                                <div class="about">Estudiante en URJC</div>
+                                <div class="about" data-i18n="victor-linkedin-about">Estudiante en URJC</div>
                             </div>
                         </div>
                         <div class="text">
@@ -1061,10 +1106,10 @@
 
                 <img src="sergio.jpeg" class="images" alt="Sergio Ponce García">
 
-                <p style="text-align: center;"><b>Artista 3D y UI/UX</b></p>
+                <p style="text-align: center;"><b data-i18n="sergio-role">Artista 3D y UI/UX</b></p>
 
                 <div class="card-extra">
-                    <p> Actualmente curso el grado en Diseño y Desarrollo de Videojuegos en la URJC. Durante mi formación, me he enfocado en el diseño, modelado y animación 3D, además de la experiencia de usuario e interfaces. Manejo herramientas como Blender, Maya, 3ds Max, ZBrush, Substance Painter y Unity, adaptándome al flujo de trabajo de la industria. </p>
+                    <p data-i18n="sergio-p1"> Actualmente curso el grado en Diseño y Desarrollo de Videojuegos en la URJC. Durante mi formación, me he enfocado en el diseño, modelado y animación 3D, además de la experiencia de usuario e interfaces. Manejo herramientas como Blender, Maya, 3ds Max, ZBrush, Substance Painter y Unity, adaptándome al flujo de trabajo de la industria. </p>
                 </div>
 
                 <div class="social-links-container">
@@ -1082,7 +1127,7 @@
                                         <div class="username">@starshifer.3d</div>
                                     </div>
                                 </div>
-                                <div class="about">Cuenta de arte</div>
+                                <div class="about" data-i18n="sergio-ig-about">Cuenta de arte</div>
                             </div>
                         </div>
                         <div class="text">
@@ -1110,7 +1155,7 @@
                                         <div class="username">Ponce García</div>
                                     </div>
                                 </div>
-                                <div class="about">Estudiante URJC</div>
+                                <div class="about" data-i18n="sergio-linkedin-about">Estudiante URJC</div>
                             </div>
                         </div>
                         <div class="text">
@@ -1164,12 +1209,12 @@
 
                 <img src="lucas.jpeg" class="images" alt="Lucas Joglar Liebana">
 
-                <p style="text-align: center;"><b>Programador</b></p>
+                <p style="text-align: center;"><b data-i18n="lucas-role">Programador</b></p>
 
                 <div class="card-extra">
-                    <p><strong>Programación:</strong> C#, C++, JavaScript, HTML y CSS.</p>
-                    <p><strong>Game Development:</strong> Unity, sistemas de gameplay, UI, animación e integración de audio.</p>
-                    <p><strong>Herramientas:</strong> Git, GitHub, Visual Studio y herramientas de diseño.</p>
+                    <p data-i18n="lucas-p1"><strong>Programación:</strong> C#, C++, JavaScript, HTML y CSS.</p>
+                    <p data-i18n="lucas-p2"><strong>Game Development:</strong> Unity, sistemas de gameplay, UI, animación e integración de audio.</p>
+                    <p data-i18n="lucas-p3"><strong>Herramientas:</strong> Git, GitHub, Visual Studio y herramientas de diseño.</p>
                 </div>
 
                 <div class="social-links-container">
@@ -1185,7 +1230,7 @@
                                         <div class="username">Joglar Liebana</div>
                                     </div>
                                 </div>
-                                <div class="about">Estudiante URJC</div>
+                                <div class="about" data-i18n="lucas-linkedin-about">Estudiante URJC</div>
                             </div>
                         </div>
                         <div class="text">
@@ -1235,7 +1280,7 @@
          PROYECTOS
          =================================================== -->
     <section id="proyectos">
-        <h2 class="section-title">Nuestros Proyectos
+        <h2 class="section-title"><span data-i18n="title-projects">Nuestros Proyectos</span>
                   <img src="chincheta.png" class="foto-superior"  id="pin-hero4" data-conecta="pin-hero3"
          style="--left: calc(100% - 20px - var(--tam) / 2); --top: calc(50% - var(--tam) / 2);">
         </h2>
@@ -1252,7 +1297,7 @@
                 style="--left: calc(30px - var(--tam) / 2); --top:0px; --rot: -85deg;
                 --left-m: calc(100% - 16px - var(--tam) / 2); --top-m: calc(40px - var(--tam) / 2);">
                 
-                <p style="text-align: justify;">
+                <p style="text-align: justify;" data-i18n="project-p1">
                     Ponte en los pies del mejor detective de toda la ciudad. Encuentra pistas, resuelve enigmas
                     y avanza en una historia que guarda un oscuro y extraño secreto. Coge tu linterna, gabardina
                     y adéntrate en el misterio que rodea a toda esta historia.
@@ -1289,14 +1334,14 @@
                         referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                 </div>
 
-                <p style="text-align: justify; margin-top: 50px; margin-bottom: 50px;">
+                <p style="text-align: justify; margin-top: 50px; margin-bottom: 50px;" data-i18n="project-p2">
                     Para avanzar, necesitarás reunir pistas, hablar con curiosos personajes, y responder los
                     misterios que te plantee el mundo. ¿Serás capaz de llegar a la verdad?
                 </p>
 
                 <a href="https://squeakyboy.itch.io/catnoir">
                     <button class="btn-wide">
-                        <span class="button_itch">Descubre más en itch.io</span>
+                        <span class="button_itch" data-i18n="project-btn">Descubre más en itch.io</span>
                     </button>
                 </a>
             </div>
@@ -1308,8 +1353,8 @@
          CONTACTO
          =================================================== -->
     <section id="contacto">
-        <h2 class="section-title">Contacto</h2>
-        <p class="contact-info">
+        <h2 class="section-title"><span data-i18n="title-contact">Contacto</span></h2>
+        <p class="contact-info" data-i18n="contact-p">
             Si te interesa nuestro trabajo y quieres conocer más, o simplemente quieres charlar o tienes una
             pregunta, escríbenos a <b>digit.bomb8@gmail.com</b> o síguenos en nuestras redes:
         </p>
@@ -1345,7 +1390,7 @@
     </section>
 
     <footer>
-        <p>&copy; 2026 DigitBombStudios. Con mucho amor.</p>
+        <p data-i18n="footer-p">&copy; 2026 DigitBombStudios. Con mucho amor.</p>
     </footer>
 
     <!-- ===================================================
@@ -1497,6 +1542,95 @@ if (window.visualViewport) {
     window.visualViewport.addEventListener('resize', actualizarVisibilidadCurva);
     window.visualViewport.addEventListener('scroll', actualizarVisibilidadCurva);
 }
+</script>
+
+<!-- ===================================================
+     TRADUCTOR ES / EN
+     Cada elemento con data-i18n="clave" guarda su texto
+     original en español (data-es) y se traduce buscando
+     "clave" en el objeto translations.en de abajo.
+     =================================================== -->
+<script>
+(function () {
+    const translations = {
+        en: {
+            "nav-about": "About Us",
+            "nav-projects": "Projects",
+            "nav-contact": "Contact",
+
+            "hero-title": "Hi, we're <span>DigitBomb Studios!</span>",
+            "hero-p": "We're a small indie studio from Madrid made up of three students from Universidad Rey Juan Carlos. After winning the <a href = \"https://itch.io/jam/7-edicin-game-jam-game-scholars/entries\">7th GameScholars Jam</a>, we've attended several events such as the CyL Games Show and the Guerrilla Game Festival, with the BCN Game Fest coming up next.",
+            "hero-btn": "Projects",
+
+            "title-about": "About Us",
+            "title-projects": "Our Projects",
+            "title-contact": "Contact",
+
+            "victor-role": "Programmer and Composer",
+            "victor-p1": "I'm currently studying the 4th year of Video Game Design and Development at URJC. Throughout my degree I've focused on both programming and sound design.",
+            "victor-p2": "I specialize in Unity (C#), and in FL Studio and Audacity to compose and design sound effects and music.",
+            "victor-spotify-about": "2 Monthly Listeners",
+            "victor-linkedin-about": "Student at URJC",
+
+            "sergio-role": "3D Artist and UI/UX",
+            "sergio-p1": "I'm currently studying Video Game Design and Development at URJC. Throughout my studies I've focused on 3D design, modeling and animation, as well as user experience and interfaces. I work with tools such as Blender, Maya, 3ds Max, ZBrush, Substance Painter and Unity, adapting to the industry's workflow.",
+            "sergio-ig-about": "Art account",
+            "sergio-linkedin-about": "Student at URJC",
+
+            "lucas-role": "Programmer",
+            "lucas-p1": "<strong>Programming:</strong> C#, C++, JavaScript, HTML and CSS.",
+            "lucas-p2": "<strong>Game Development:</strong> Unity, gameplay systems, UI, animation and audio integration.",
+            "lucas-p3": "<strong>Tools:</strong> Git, GitHub, Visual Studio and design tools.",
+            "lucas-linkedin-about": "URJC Student",
+
+            "project-p1": "Step into the shoes of the best detective in the whole city. Find clues, solve puzzles, and move forward through a story hiding a dark and strange secret. Grab your flashlight and trench coat, and step into the mystery surrounding this whole story.",
+            "project-p2": "To move forward, you'll need to gather clues, talk to curious characters, and answer the mysteries the world puts in front of you. Will you be able to reach the truth?",
+            "project-btn": "Discover more on itch.io",
+
+            "contact-p": "If you're interested in our work and want to know more, or you just want to chat or have a question, write to us at <b>digit.bomb8@gmail.com</b> or follow us on our social media:",
+
+            "footer-p": "&copy; 2026 DigitBombStudios. With lots of love."
+        }
+    };
+
+    const elementos = document.querySelectorAll('[data-i18n]');
+
+    // Guarda el HTML original en español de cada elemento antes de tocar nada
+    elementos.forEach(function (el) {
+        el.dataset.es = el.innerHTML;
+    });
+
+    function setLanguage(lang) {
+        elementos.forEach(function (el) {
+            const clave = el.dataset.i18n;
+            if (lang === 'es') {
+                el.innerHTML = el.dataset.es;
+            } else if (translations.en[clave] !== undefined) {
+                el.innerHTML = translations.en[clave];
+            }
+        });
+
+        document.documentElement.lang = lang;
+
+        document.querySelectorAll('#lang-toggle .lang-option').forEach(function (opt) {
+            opt.classList.toggle('active', opt.dataset.lang === lang);
+        });
+
+        try { localStorage.setItem('digitbomb-lang', lang); } catch (e) { /* almacenamiento no disponible */ }
+    }
+
+    // Se expone para que el botón (onclick="setLanguage(...)") pueda llamarla
+    window.setLanguage = setLanguage;
+
+    // Recupera el idioma guardado la última vez, si lo hay
+    let idiomaInicial = 'es';
+    try {
+        const guardado = localStorage.getItem('digitbomb-lang');
+        if (guardado === 'en' || guardado === 'es') idiomaInicial = guardado;
+    } catch (e) { /* almacenamiento no disponible */ }
+
+    setLanguage(idiomaInicial);
+})();
 </script>
 </body>
 </html>
